@@ -5,20 +5,18 @@ import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from 'entities/User';
+import { getUserInited, userActions } from 'entities/User';
 import { getSettingsForm } from 'entities/Settings';
 
 function App() {
     const dispatch = useDispatch();
     const { theme, changeTheme } = useTheme();
+    const inited = useSelector(getUserInited);
 
-    // 1) стартовая инициализация пользователя
     useEffect(() => {
         dispatch(userActions.initAuthData());
     }, [dispatch]);
 
-    // 2) «мост» темы: применяем тему из стора
-    // @ts-ignore
     const settingsTheme = useSelector(getSettingsForm)?.theme as Theme | undefined;
 
     useEffect(() => {
@@ -33,7 +31,7 @@ function App() {
                 <Navbar />
                 <div className="content-page">
                     <Sidebar />
-                    <AppRouter />
+                    {inited && <AppRouter />}
                 </div>
             </Suspense>
         </div>

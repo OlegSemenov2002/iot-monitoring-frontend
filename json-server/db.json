@@ -22,7 +22,20 @@
     {
       "id": "1",
       "username": "admin",
-      "password": "123"
+      "password": "123",
+      "roles": ["ADMIN"]
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "123",
+      "roles": ["USER"]
+    },
+    {
+      "id": "3",
+      "username": "manager",
+      "password": "123",
+      "roles": ["MANAGER"]
     }
   ],
   "profile": {

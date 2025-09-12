@@ -5,6 +5,8 @@ import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { LoginModal } from 'features/AuthByUsername';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData, userActions } from 'entities/User';
+import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import cls from './Navbar.module.scss';
 
 interface NavbarProps {
@@ -39,6 +41,18 @@ export const Navbar = memo(({ className }: NavbarProps) => {
                 >
                     {t('Выйти')}
                 </Button>
+
+                <div>
+                    <AppLink
+                        theme={AppLinkTheme.SECONDARY}
+                        to={RoutePath.admin_panel}
+                        className={classNames('', {}, [])}
+                    >
+                        <span className={cls.link}>
+                            {t('Админка')}
+                        </span>
+                    </AppLink>
+                </div>
             </div>
         );
     }
@@ -58,6 +72,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
                     onClose={onCloseModal}
                 />
             )}
+
         </div>
     );
 });
