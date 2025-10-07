@@ -1,8 +1,10 @@
 :root {
-    --bg-color: #e8e8ea;
-    --inverted-bg-color: #090949;
-    --primary-color: #0232c2;
-    --secondary-color: #0449e0;
-    --inverted-primary-color: #04ff04;
-    --inverted-secondary-color: #049604;
+    --bg-color: #f4f7fa; /* Светло-серый с намёком на синий, нейтральный фон для таблиц */
+    --inverted-bg-color: #1f2937; /* Тёмно-серый для ночного режима/inverted, не ярко-синий */
+    --primary-color: #3b82f6; /* Мягкий синий для primary (кнопки, ссылки), но реже используй */
+    --secondary-color: #6b7280; /* Серый для secondary (текст, borders), снижает "синеву" */
+    --inverted-primary-color: #22c55e; /* Зелёный для success/акцентов, добавляет разнообразие */
+    --inverted-secondary-color: #9ca3af; /* Светло-серый для inverted текст, спокойный */
+    --text-color: #111827; /* Тёмно-серый текст, не синий — для читаемости */
+    --accent-color: #fbbf24; /* Жёлтый акцент для warnings/данных, как в трендах warm yellows */
 }

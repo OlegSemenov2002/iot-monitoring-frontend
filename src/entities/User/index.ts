@@ -4,9 +4,9 @@ export {
 export {
     getUserInited,
 } from './model/selectors/getUserInited/getUserInited';
-export {
-    isUserAdmin, isUserManager,
-} from './model/selectors/getUserRole/roleSelectors';
+// export {
+//     isUserAdmin, isUserManager,
+// } from './model/selectors/getUserRole/roleSelectors';
 export {
     userReducer,
     userActions,

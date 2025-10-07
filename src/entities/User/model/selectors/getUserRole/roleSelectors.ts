@@ -13,7 +13,7 @@ export function useCurrentUser() {
     return { user: data ?? null, isLoading };
 }
 
-export const selectRoles = createSelector(
+export const selectRole = createSelector(
     (state: StateSchema) => (getUserAuthData(state)?.roles ?? []),
     (roles) => roles,
 );
