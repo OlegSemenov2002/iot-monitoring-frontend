@@ -1,39 +1,38 @@
-export type SensorType = 'Smart-MS0101' | 'LWL04' | 'SmartHS0101' | 'Unknown';
-
-interface BaseSensor {
-    id: number | string;
-    device_id: number | string;
-    description: string;
-    model: string;
-    vendor: string;
-    device_eui: string;
-    first_act: string;
-    battery: number | string;
-    last_act: string;
-    notify_loss: number | string;
-    notify_sms: number | string;
-    security_user_id: number | string;
-    type: SensorType;
-    auto_added: number | string;
-    last_gateway_id: number | string;
-    // Общие поля
+export interface SensorType {
+    id: number; // ID типа устройства (например, 1 для Smart-MS0101)
+    name: 'Smart-MS0101' | 'Unknown'; // Название типа
 }
 
-interface Ms0101Specific {
-    type: 'Smart-MS0101';
+export interface BaseSensor {
+    id: number;
+    device_eui: string;
+    last_gateway_id: number;
+    first_act: string;
+    auto_added: number;
+    last_act: string;
+    battery: number;
+    security_user_id: number;
+    description: string;
+    notify: number;
+    notify_loss: number;
+    type: string | number; // Обновлённый тип
+}
+
+export interface Ms0101Specific {
+    id: number;
     req_confirm: boolean;
     adr: boolean;
-    repeat_count: number | string;
-    period_data_send: number | string;
+    repeat_count: number;
+    period_data_send: number;
     auto_arming: boolean;
     timezone: string;
     send_auto_arming: boolean;
-    // Специфика MS0101 (alarm, config fields)
+    datetime: string;
 }
 
-interface OtherSpecific {
-    type: Exclude<SensorType, 'Smart-MS0101'>;
-    // Заглушка: специфичные поля optional или empty
+export interface OtherSpecific {
+    type: Exclude<SensorType['id'], 1>; // ID типов, кроме Smart-MS0101 (1)
+    // Заглушка: специфичные поля отсутствуют, так как нет данных для других типов
 }
 
 export type Sensor = BaseSensor & (Ms0101Specific | OtherSpecific);

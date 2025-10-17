@@ -1,6 +1,6 @@
-
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import type { Sensor } from './types';
+import { sensorApi } from 'shared/api/sensorApi';
+import type { Sensor } from '../types/sensor';
 
 const sensorAdapter = createEntityAdapter<Sensor>({
     selectId: (sensor) => sensor.id,
@@ -11,10 +11,25 @@ const sensorSlice = createSlice({
     name: 'sensor',
     initialState: sensorAdapter.getInitialState(),
     reducers: {
-        // e.g., updateSensor: sensorAdapter.updateOne,
+        // Пример ручного обновления
+        updateSensor: sensorAdapter.updateOne,
+        addSensor: sensorAdapter.addOne,
+        removeSensor: sensorAdapter.removeOne,
     },
-    // Extra reducers для API (on fulfilled addMany/upsert)
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            sensorApi.endpoints.getSensors.matchFulfilled,
+            (state, action) => {
+                sensorAdapter.setAll(state, action.payload);
+            }
+        );
+    },
 });
 
-export const sensorSelectors = sensorAdapter.getSelectors();
+export const {
+    selectAll: selectAllSensors,
+    selectById: selectSensorById,
+} = sensorAdapter.getSelectors((state: any) => state.sensor);
+
+export const { updateSensor, addSensor, removeSensor } = sensorSlice.actions;
 export default sensorSlice.reducer;

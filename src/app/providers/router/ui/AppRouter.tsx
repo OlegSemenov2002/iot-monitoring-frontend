@@ -5,11 +5,13 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoutesProps, routeConfig } from 'shared/config/routeConfig/routeConfig';
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader';
 import { RequireAuth } from 'app/providers/router/ui/RequireAuth';
+import cls from "pages/SensorPage/ui/SensorPage.module.scss";
+import {Skeleton} from "shared/ui/Skeleton/Skeleton";
 
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {
         const element = (
-            <Suspense fallback={<PageLoader />}>
+            <Suspense fallback={<Skeleton className={cls.skeleton} width="100%" height={700} />}>
                 <div className="page-wrapper">
                     {route.element}
                 </div>

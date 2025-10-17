@@ -23,19 +23,25 @@
       "id": "1",
       "username": "admin",
       "password": "123",
-      "roles": ["ADMIN"]
+      "roles": [
+        "ADMIN"
+      ]
     },
     {
       "id": "2",
       "username": "user",
       "password": "123",
-      "roles": ["USER"]
+      "roles": [
+        "USER"
+      ]
     },
     {
       "id": "3",
       "username": "manager",
       "password": "123",
-      "roles": ["MANAGER"]
+      "roles": [
+        "MANAGER"
+      ]
     }
   ],
   "profile": {
@@ -57,154 +63,45 @@
   "devices": [
     {
       "id": 1,
-      "description": "Инфракрасный датчик движения",
-      "model": "Smart-MS0101",
-      "vendor": "Vera-Acsor",
-      "device_eui": "3733633463941913",
-      "first_act": "2024-07-25 14:24:25",
-      "battery": 99,
-      "last_act": "2025-02-17 17:04:37",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Smart-MS0101",
+      "device_eui": "3632333357376519",
+      "last_gateway_id": 7,
+      "first_act": "2025-01-14 19:52:58",
       "auto_added": 1,
-      "last_gateway_id": 817,
-      "req_confirm": true,
-      "adr": true,
-      "repeat_count": 15,
-      "period_data_send": 60,
-      "auto_arming": true,
-      "timezone": "UTC+3",
-      "send_auto_arming": true
+      "last_act": "2025-02-07 09:55:33",
+      "battery": 99,
+      "security_user_id": 1,
+      "description": "Коридор",
+      "notify": 0,
+      "loss": 0,
+      "device_type": 1
     },
     {
       "id": 2,
-      "description": "Одна Вокзальная 1",
-      "model": "Unknown",
-      "vendor": "Unknown",
-      "device_eui": "989354397808",
+      "device_eui": "393935347a387708",
+      "last_gateway_id": 7,
       "first_act": "2025-01-14 19:52:58",
-      "battery": 96,
-      "last_act": "2025-02-07 09:55:33",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Unknown",
       "auto_added": 1,
-      "last_gateway_id": 7
+      "last_act": "2025-02-07 09:55:33",
+      "battery": 96,
+      "security_user_id": 1,
+      "description": "Одна Вокзальная 1",
+      "notify": 1,
+      "loss": 0,
+      "type": 1
     },
     {
       "id": 3,
-      "description": "Опен HC-27",
-      "model": "HC-27",
-      "vendor": "Open",
-      "device_eui": "353353351413",
-      "first_act": "2025-02-17 17:40:13",
-      "battery": 66,
-      "last_act": "2025-02-07 10:14:09",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Unknown",
+      "device_eui": "373536335c317f13",
+      "last_gateway_id": 7,
+      "first_act": "2025-01-14 19:52:58",
       "auto_added": 1,
-      "last_gateway_id": 817
-    },
-    {
-      "id": 4,
-      "description": "Артур22",
-      "model": "LWL04",
-      "vendor": "Dragino",
-      "device_eui": "353353317413",
-      "first_act": "2025-02-21 14:39:59",
+      "last_act": "2025-02-07 09:55:33",
       "battery": 96,
-      "last_act": "2025-02-07 10:41:42",
-      "notify_loss": 0,
-      "notify_sms": 0,
       "security_user_id": 1,
-      "type": "LWL04",
-      "auto_added": 1,
-      "last_gateway_id": 7
-    },
-    {
-      "id": 5,
-      "description": "Тимошенко с 25.03",
-      "model": "SmartH50101",
-      "vendor": "Bera-Acsor",
-      "device_eui": "353353350113",
-      "first_act": "2025-03-04 13:57:49",
-      "battery": 64,
-      "last_act": "2025-02-18 08:20:25",
-      "notify_loss": 1,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "SmartH50101",
-      "auto_added": 1,
-      "last_gateway_id": 817
-    },
-    {
-      "id": 6,
-      "description": "Марина HC 07.03.2025",
-      "model": "HC",
-      "vendor": "Unknown",
-      "device_eui": "353353317413",
-      "first_act": "2025-03-04 10:33:04",
-      "battery": 0,
-      "last_act": "2025-02-07 10:02:45",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Unknown",
-      "auto_added": 1,
-      "last_gateway_id": 7
-    },
-    {
-      "id": 7,
-      "description": "Андрей",
-      "model": "Unknown",
-      "vendor": "Unknown",
-      "device_eui": "942355820720d",
-      "first_act": "2025-03-04 10:15:38",
-      "battery": 47,
-      "last_act": "2025-02-07 10:33:04",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Unknown",
-      "auto_added": 1,
-      "last_gateway_id": 817
-    },
-    {
-      "id": 8,
-      "description": "Тест lwl04",
-      "model": "LWL04",
-      "vendor": "Dragino",
-      "device_eui": "353353317413",
-      "first_act": "2025-02-21 14:39:59",
-      "battery": 96,
-      "last_act": "2025-02-07 10:33:38",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "LWL04",
-      "auto_added": 1,
-      "last_gateway_id": 7
-    },
-    {
-      "id": 9,
-      "description": "Тест дверь1",
-      "model": "Unknown",
-      "vendor": "Unknown",
-      "device_eui": "353353350113",
-      "first_act": "2025-03-04 13:57:49",
-      "battery": 93,
-      "last_act": "2025-02-07 10:15:38",
-      "notify_loss": 0,
-      "notify_sms": 0,
-      "security_user_id": 1,
-      "type": "Unknown",
-      "auto_added": 1,
-      "last_gateway_id": 817
+      "description": "Олег ЧС 2-7",
+      "notify": 0,
+      "loss": 0,
+      "type": 1
     }
   ],
   "alarms": [
