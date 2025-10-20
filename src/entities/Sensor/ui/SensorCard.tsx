@@ -1,7 +1,6 @@
 import {classNames} from "shared/lib/classNames/classNames";
 import cls from './SensorCard.module.scss';
 import {useTranslation} from "react-i18next";
-import {useGetSensorQuery} from "shared/api/sensorApi";
 import {useParams} from "react-router-dom";
 import {Sensor} from "entities/Sensor/model/types/sensor";
 

@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Switch } from 'shared/ui/Switch/Switch';
 import React, { memo } from 'react';
 import { Sensor } from 'entities/Sensor/model/types/sensor';
-import { useToggleSensorNotify } from 'features/SensorNotifications/ui';
+
 import cls from './SensorRow.module.scss';
 import {Link} from "react-router-dom";
 import {RoutePath} from "shared/config/routeConfig/routeConfig";
+import {useToggleSensorNotify} from "features/SensorNotifications";
 
 interface SensorRowProps {
     className?: string;

@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useGetSensorQuery } from 'shared/api/sensorApi';
 import cls from './SensorDetailsPage.module.scss';
 import React, {memo} from "react";
+import {useGetLastAlarmsByDeviceIdQuery} from "shared/api/alarmApi";
+import {AlarmList} from "widgets/AlarmList";
 
 
 interface SensorDetailsPageProps {
@@ -17,6 +19,8 @@ interface SensorDetailsPageProps {
 
     const { data: sensor, isLoading, error } = useGetSensorQuery(Number(id));
 
+
+
     if (isLoading) return <div>{t('Загрузка...')}</div>;
     if (error || !sensor) return <div>{t('Ошибка загрузки данных')}</div>;
 
@@ -27,6 +31,7 @@ interface SensorDetailsPageProps {
     return (
         <div className={classNames(cls.SensorPage$, {}, [className])}>
             <SensorCard sensor={sensor} />
+            <AlarmList sensorId={Number(id)} />
         </div>
     );
 };

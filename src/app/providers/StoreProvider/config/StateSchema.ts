@@ -1,4 +1,4 @@
-import { CounterSchema } from 'entities/Counter';
+
 import { UserSchema } from 'entities/User';
 import { LoginSchema } from 'features/AuthByUsername';
 import {
@@ -14,7 +14,6 @@ import { SettingsSchema } from 'entities/Settings';
 import { rtkApi } from 'shared/api/rtkApi';
 
 export interface StateSchema {
-    counter: CounterSchema;
     user: UserSchema;
     settings: SettingsSchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
