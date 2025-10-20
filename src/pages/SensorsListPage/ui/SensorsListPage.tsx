@@ -1,19 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from 'shared/ui/Loader/Loader';
 
-import { Table } from 'shared/ui/Table/Table';
-import { Switch } from 'shared/ui/Switch/Switch';
-import { Sensor } from 'entities/Sensor/model/types/sensor';
 import {Skeleton} from 'shared/ui/Skeleton/Skeleton';
-import cls from './SensorPage.module.scss';
+import cls from './SensorsListPage.module.scss';
 import {TextAlign} from "shared/ui/Text/Text";
 import {Text} from "shared/ui/Text/Text";
 import  {useGetSensorsQuery} from "shared/api/sensorApi";
 import {useToggleSensorNotify} from "features/SensorNotifications/lib/useToggleSensorNotify";
 import {SensorTable} from "entities/Sensor/ui/SensorTable";
 
-const SensorPage = () => {
+const SensorsListPage = () => {
 
     const { t } = useTranslation('SensorPage');
 
@@ -59,4 +55,4 @@ const SensorPage = () => {
     return content;
 };
 
-export default SensorPage;
+export default SensorsListPage;

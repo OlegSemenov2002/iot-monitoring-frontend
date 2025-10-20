@@ -5,6 +5,8 @@ import React, { memo } from 'react';
 import { Sensor } from 'entities/Sensor/model/types/sensor';
 import { useToggleSensorNotify } from 'features/SensorNotifications/ui';
 import cls from './SensorRow.module.scss';
+import {Link} from "react-router-dom";
+import {RoutePath} from "shared/config/routeConfig/routeConfig";
 
 interface SensorRowProps {
     className?: string;
@@ -16,15 +18,20 @@ export const SensorRow = memo(({ className, sensor }:SensorRowProps) => {
     const { toggleNotify, isLoadingToggle, optimisticNotify } = useToggleSensorNotify();
     return (
         <tr key={sensor.id}>
-            <td>{sensor.id}</td>
-            <td>{sensor.description}</td>
-            <td>{sensor.last_act}</td>
             <td>
-                {sensor.battery}
-                %
+                <Link to={`${RoutePath.sensors}/${sensor.id}`}>
+                    {sensor.id}
+                </Link>
             </td>
             <td>
-                {sensor.type === 1 ? ( // Сравниваем с числом 1, а не строкой '1'
+                <Link to={`${RoutePath.sensors}/${sensor.id}`}>
+                    {sensor.description}
+                </Link>
+            </td>
+            <td>{sensor.last_act}</td>
+            <td>{sensor.battery}%</td>
+            <td>
+                {sensor.type === 1 ? (
                     <Switch
                         checked={
                             optimisticNotify[sensor.id] !== undefined
@@ -35,7 +42,7 @@ export const SensorRow = memo(({ className, sensor }:SensorRowProps) => {
                         disabled={isLoadingToggle(sensor.id)}
                     />
                 ) : (
-                    <div>Заглушка (не MS0101)</div>
+                    <div>{t('Заглушка (не MS0101)')}</div>
                 )}
             </td>
         </tr>

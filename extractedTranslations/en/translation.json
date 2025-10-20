@@ -1,10 +1,16 @@
 {
+  "123е": "123е",
+  "Battery": "Battery",
+  "Description": "Description",
+  "Device EUI": "Device EUI",
+  "Last Activity": "Last Activity",
   "Lorem ipsum dolor sit amet, consectetur adipisicing elit": {
     " Aliquid commodi consequatur eligendi impedit incidunt necessitatibus possimus quis saepe sunt totam": {
       "": ""
     }
   },
   "PROFILE PAGE": "",
+  "Sensor": "Sensor",
   "SensorPage": "SensorPage",
   "decrement": "decrement",
   "increment": "increment",
@@ -24,11 +30,20 @@
   "Главная": "Главная",
   "Главная страница": "Главная страница",
   "Город": "Город",
+  "Заглушка (не MS0101)": "Заглушка (не MS0101)",
+  "Загрузка": {
+    "": {
+      "": {
+        "": ""
+      }
+    }
+  },
   "Настройки": "Настройки",
   "О сайте": "О сайте",
   "О сайте123123": "О сайте123123",
   "Обновить страницу": "Обновить страницу",
   "Отменить": "Отменить",
+  "Ошибка загрузки данных": "Ошибка загрузки данных",
   "Переключить": "Переключить",
   "Попробуйте обновить страницу": "Попробуйте обновить страницу",
   "Произошла непредвиденная ошибка": "Произошла непредвиденная ошибка",

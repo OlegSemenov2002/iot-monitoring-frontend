@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
-export const SensorPageAsync = lazy(() => new Promise((resolve) => {
+export const SensorDetailsPageAsync = lazy(() => new Promise((resolve) => {
     // @ts-ignore
     // ТАК В РЕАЛЬНЫХ ПРОЕКТАХ НЕ ДЕЛАТЬ!!!!! ДЕЛАЕМ ДЛЯ КУРСА!
-    resolve(import('./SensorPage'));
+    setTimeout(() => resolve(import('./SensorDetailsPage')), 1500);
 }));

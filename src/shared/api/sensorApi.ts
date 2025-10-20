@@ -6,14 +6,14 @@ export const sensorApi = rtkApi
     .enhanceEndpoints({ addTagTypes: ['Alarms', 'Sensors', 'Config'] })
     .injectEndpoints({
         endpoints: (build) => ({
-            getSensors: build.query<any[], void>({
+            getSensors: build.query<Sensor[], void>({
                 query: () => '/devices',
                 providesTags: ['Sensors'],
-                // transformResponse: (response: any[]) => response.map((device) => ({
-                //     ...device,
-                //     type: device.model === 'Smart-MS0101' ? 'Smart-MS0101' : 'Unknown', // Определение типа
-                // })),
 
+            }),
+            getSensor: build.query<Sensor, number>({
+                query: (sensorId) => `/devices/${sensorId}`,
+                providesTags: (result, error, sensorId) => [{ type: 'Sensors', id: sensorId }],
             }),
 
             updateSensorNotify: build.mutation<Sensor, { sensorId: number; notifyStatus: number }>({
@@ -22,30 +22,29 @@ export const sensorApi = rtkApi
                     method: 'PATCH',
                     body: { notify: notifyStatus },
                 }),
-                // Убрали invalidatesTags: ['Sensors']
+
                 async onQueryStarted({ sensorId, notifyStatus }, { dispatch, queryFulfilled }) {
-                    // Оптимистическое обновление кэша getSensors
                     const patchResult = dispatch(
                         sensorApi.util.updateQueryData('getSensors', undefined, (draft) => {
                             const sensor = draft.find((s) => s.id === sensorId);
                             if (sensor) {
-                                sensor.notify = notifyStatus; // Точечное обновление поля notify
+                                sensor.notify = notifyStatus;
                             }
-                        })
+                        }),
                     );
                     try {
                         const { data } = await queryFulfilled;
-                        // Точное обновление кэша ответом сервера
+
                         dispatch(
                             sensorApi.util.updateQueryData('getSensors', undefined, (draft) => {
                                 const index = draft.findIndex((s) => s.id === sensorId);
                                 if (index !== -1) {
-                                    draft[index] = data; // Заменяем сенсор ответом сервера
+                                    draft[index] = data;
                                 }
-                            })
+                            }),
                         );
                     } catch {
-                        patchResult.undo(); // Откат при ошибке
+                        patchResult.undo();
                     }
                 },
             }),
@@ -74,10 +73,12 @@ export const sensorApi = rtkApi
                 },
             }),
         }),
+
     });
 
 export const {
     useGetSensorsQuery,
+    useGetSensorQuery,
     useGetSensorAlarmsQuery,
     useUpdateSensorNotifyMutation,
     useGetSensorConfigQuery,

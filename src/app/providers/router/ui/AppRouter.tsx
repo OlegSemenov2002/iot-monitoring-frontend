@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoutesProps, routeConfig } from 'shared/config/routeConfig/routeConfig';
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader';
 import { RequireAuth } from 'app/providers/router/ui/RequireAuth';
-import cls from "pages/SensorPage/ui/SensorPage.module.scss";
+import cls from "pages/SensorsListPage/ui/SensorsListPage.module.scss";
 import {Skeleton} from "shared/ui/Skeleton/Skeleton";
 
 const AppRouter = () => {

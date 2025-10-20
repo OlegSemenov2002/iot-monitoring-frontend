@@ -99,7 +99,7 @@
       "battery": 96,
       "security_user_id": 1,
       "description": "Олег ЧС 2-7",
-      "notify": 0,
+      "notify": 1,
       "loss": 0,
       "type": 1
     }

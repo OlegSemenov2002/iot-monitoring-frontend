@@ -6,7 +6,10 @@ import { ProfilePage } from 'pages/ProfilePage';
 import { SettingsPage } from 'pages/SettingsPage';
 import { AdminPanelPage } from 'pages/AdminPanelPage';
 import { UserRole } from 'entities/User';
-import {SensorPage} from "pages/SensorPage";
+import {SensorsListPage} from "pages/SensorsListPage";
+import {SensorDetailsPage} from "pages/SensorDetailsPage";
+
+
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -19,7 +22,8 @@ export enum AppRoutes {
     PROFILE = 'profile',
     SETTINGS = 'settings',
     ADMIN_PANEL = 'admin_panel',
-    SENSOR= 'sensor',
+    SENSORS= 'sensors',
+    SENSOR_DETAILS = 'sensor_details',
     // last
     NOT_FOUND = 'not_found',
 }
@@ -30,10 +34,13 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.PROFILE]: '/profile',
     [AppRoutes.SETTINGS]: '/settings',
     [AppRoutes.ADMIN_PANEL]: '/admin',
-    [AppRoutes.SENSOR]: '/sensor',
+    [AppRoutes.SENSORS]: '/sensors',
+    [AppRoutes.SENSOR_DETAILS]: '/sensors/',
     // последний
     [AppRoutes.NOT_FOUND]: '*',
 };
+
+
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -43,6 +50,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ABOUT]: {
         path: RoutePath.about,
         element: <AboutPage />,
+        authOnly: true,
     },
     [AppRoutes.PROFILE]: {
         path: RoutePath.profile,
@@ -52,7 +60,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.SETTINGS]: {
         path: RoutePath.settings,
         element: <SettingsPage />,
-        authOnly: true,
+
     },
     [AppRoutes.ADMIN_PANEL]: {
         path: RoutePath.admin_panel,
@@ -60,9 +68,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         authOnly: true,
         roles: [UserRole.MANAGER, UserRole.ADMIN],
     },
-    [AppRoutes.SENSOR]: {
-        path: RoutePath.sensor,
-        element: <SensorPage />,
+    [AppRoutes.SENSORS]: {
+        path: RoutePath.sensors,
+        element: <SensorsListPage />,
+        authOnly: true,
+    },
+    [AppRoutes.SENSOR_DETAILS]: {
+        path: `${RoutePath.sensor_details}:id`,
+        element: <SensorDetailsPage />,
         authOnly: true,
     },
     // last

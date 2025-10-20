@@ -17,19 +17,19 @@ export const SidebarItemsList: SidebarItemType[] = [
         Icon: MainIcon,
         text: 'Главная',
     },
-    // {
-    //     path: RoutePath.about,
-    //     Icon: AboutIcon,
-    //     text: 'О сайте',
-    // },
-    // {
-    //     path: RoutePath.settings,
-    //     Icon: ProfileIcon,
-    //     text: 'Настройки',
-    //     authOnly: true,
-    // },
     {
-        path: RoutePath.sensor,
+        path: RoutePath.about,
+        Icon: AboutIcon,
+        text: 'О сайте',
+    },
+    {
+        path: RoutePath.settings,
+        Icon: ProfileIcon,
+        text: 'Настройки',
+        authOnly: true,
+    },
+    {
+        path: RoutePath.sensors,
         Icon: AboutIcon,
         text: 'Датчики',
         authOnly: true,
