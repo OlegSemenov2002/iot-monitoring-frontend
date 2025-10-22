@@ -7,6 +7,7 @@ import cls from './SensorDetailsPage.module.scss';
 import React, {memo} from "react";
 import {useGetLastAlarmsByDeviceIdQuery} from "shared/api/alarmApi";
 import {AlarmList} from "widgets/AlarmList";
+import {Skeleton} from "shared/ui/Skeleton/Skeleton";
 
 
 interface SensorDetailsPageProps {
@@ -21,7 +22,10 @@ interface SensorDetailsPageProps {
 
 
 
-    if (isLoading) return <div>{t('Загрузка...')}</div>;
+    if (isLoading) return (<>
+        <Skeleton width={600} height={200}/>
+
+    </>)
     if (error || !sensor) return <div>{t('Ошибка загрузки данных')}</div>;
 
     const s = sensor; // если API возвращает массив

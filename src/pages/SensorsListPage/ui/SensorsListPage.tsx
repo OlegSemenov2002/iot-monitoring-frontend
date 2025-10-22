@@ -27,15 +27,20 @@ const SensorsListPage = () => {
     if (isLoading) {
         content = (
             <>
-                <Skeleton className={cls.skeleton} width="100%" height={500} >
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                </Skeleton>
+
+
+                <Skeleton className={cls.skeleton} width="90%" height={40} />
+                <Skeleton className={cls.skeleton} width="90%" height={40} />
+                <Skeleton className={cls.skeleton} width="90%" height={40} />
+                <Skeleton className={cls.skeleton} width="90%" height={40} />
+                <Skeleton className={cls.skeleton} width="90%" height={40} />
+
+
+
+
+
+
+
 
             </>
         );

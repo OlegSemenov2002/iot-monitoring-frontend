@@ -1,5 +1,5 @@
-import { SensorDetailsPageAsync } from './ui/SensorDetailsPage.async';
+import SensorDetailsPage from './ui/SensorDetailsPage';
 
 export {
-    SensorDetailsPageAsync as SensorDetailsPage,
+    SensorDetailsPage
 };
