@@ -32,4 +32,3 @@ export const {
 } = alarmAdapter.getSelectors((state: any) => state.alarm);
 
 export const { updateAlarm, addAlarm, removeAlarm } = alarmSlice.actions;
-export default alarmSlice.reducer;

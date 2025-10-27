@@ -1,4 +1,4 @@
-import {AlarmList } from './ui/AlarmList';
+import {AlarmList } from './ui/AlarmList/AlarmList';
 
 export {
     AlarmList

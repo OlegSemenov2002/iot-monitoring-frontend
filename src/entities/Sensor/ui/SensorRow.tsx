@@ -18,7 +18,7 @@ export const SensorRow = memo(({ className, sensor }:SensorRowProps) => {
     const { t } = useTranslation();
     const { toggleNotify, isLoadingToggle, optimisticNotify } = useToggleSensorNotify();
     return (
-        <tr key={sensor.id}>
+        <tr key={sensor.id} className={classNames(cls.SensorRow, {}, [className])}>
             <td>
                 <Link to={`${RoutePath.sensors}/${sensor.id}`}>
                     {sensor.id}
