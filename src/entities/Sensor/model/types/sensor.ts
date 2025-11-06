@@ -64,3 +64,5 @@ export interface SensorConfig {
     send_auto_arming: boolean;
     datetime: string | string;
 }
+
+

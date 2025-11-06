@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { SensorCard } from 'entities/Sensor/ui/SensorCard';
+import {SENSOR_CARD_VIEWS, SensorCard} from 'entities/Sensor/ui/SensorCard/SensorCard';
 import { useParams } from 'react-router-dom';
 import { useGetSensorQuery } from 'shared/api/sensorApi';
 import React, {memo, useCallback, useRef} from 'react';
@@ -38,7 +38,7 @@ const SensorDetailsPage = ({ className }: SensorDetailsPageProps) => {
     }
     return (
         <Page ref={pageRef}>
-            <SensorCard sensor={sensor} />
+            <SensorCard view={SENSOR_CARD_VIEWS.FULL} sensor={sensor} />
             <AlarmList sensorId={Number(id)} wrapperRef={pageRef} />
         </Page>
     );
