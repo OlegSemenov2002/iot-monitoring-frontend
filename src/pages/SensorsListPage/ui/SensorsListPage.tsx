@@ -8,6 +8,7 @@ import {Text} from "shared/ui/Text/Text";
 import  {useGetSensorsQuery} from "shared/api/sensorApi";
 import {useToggleSensorNotify} from "features/SensorNotifications/lib/useToggleSensorNotify";
 import {SensorTable} from "entities/Sensor/ui/SensorTable";
+import {Page} from "shared/ui/Page/Page";
 
 const SensorsListPage = () => {
 
@@ -53,7 +54,10 @@ const SensorsListPage = () => {
         );
     } else {
         content = (
-            <SensorTable sensors={sensors} />
+            <Page>
+                <SensorTable sensors={sensors} />
+            </Page>
+
         );
     }
 

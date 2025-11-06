@@ -16,9 +16,25 @@ export const alarmApi = rtkApi
                     },
                 }),
             }),
+            getLastAlarmsPartlyByDeviceId: build.query({
+                query: ({ deviceId, page, n }) => ({
+                    url: '/alarms',
+                    params: {
+                        device_id: deviceId,
+                        _sort: 'date_time',
+                        _order: 'desc',
+                        _page: page,
+                        _limit: n,
+                    },
+                }),
+
+                providesTags: (result, error, { deviceId }) => [{ type: 'Alarms', id: deviceId }],
+            }),
         }),
     });
 
 export const {
     useGetLastAlarmsByDeviceIdQuery,
+    useGetLastAlarmsPartlyByDeviceIdQuery,
+
 } = alarmApi;

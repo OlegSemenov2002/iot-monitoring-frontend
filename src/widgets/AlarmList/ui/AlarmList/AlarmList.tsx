@@ -1,84 +1,55 @@
-import React, {memo, useMemo, useState} from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { useGetLastAlarms } from 'features/AlarmList';
-import { Alarm } from 'entities/Alarm/model/types/Alarm';
-import { Bell, Laptop, Smartphone, RefreshCcw, Loader2 } from 'lucide-react';
+import React, {memo, MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
+import { useGetLastAlarmsPartlyByDeviceIdQuery } from 'shared/api/alarmApi';
+import {Alarm, AlarmListItem} from 'entities/Alarm';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import cls from './AlarmList.module.scss';
-import {Skeleton} from "shared/ui/Skeleton/Skeleton";
+import {useInfiniteScroll} from "shared/lib/hooks/useInfiniteScroll/useInfiniteScroll";
+import {usePageAlarms} from "features/AlarmList/lib/useGetPageAlarms";
 
 interface AlarmListProps {
     className?: string;
     sensorId: number;
+    onLoadNextAlarm?: () => void;
+    wrapperRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
 
-function AlarmItem(props: { alarm: any }) {
-    return null;
-}
 
-export const AlarmList = ({ className, sensorId }: AlarmListProps) => {
-    const { data, isLoading, error, refetch } = useGetLastAlarms(sensorId, 10);
-    const alarms = useMemo(() => data ?? [], [data]);
 
-    const active = alarms.filter(a => !a.date_fix);
-    const fixed = alarms.filter(a => a.date_fix);
+export const AlarmList = memo(({ className, sensorId,wrapperRef }: AlarmListProps) => {
+    const { data, isLoading, isFetching, error, hasMore, loadNext } = usePageAlarms({ deviceId: sensorId });
+    const triggerRef = useRef<HTMLDivElement | null>(null);
 
-    const tabs = [
-        { id: 'all', label: 'Все', list: alarms },
-        { id: 'active', label: 'Активные', list: active },
-        { id: 'fixed', label: 'Исправленные', list: fixed },
-    ];
-
-    const [activeTab, setActiveTab] = useState('all');
-
-    if (isLoading) return (
-        <>
-            <Skeleton width={1300} height={70}/>
-            <Skeleton width={1300} height={70}/>
-            <Skeleton width={1300} height={70}/>
-        </>
-    )
-
-    if (error) {
-        return (
-            <div className={cls.error}>
-                Ошибка: {String(error)}
-                <button className={cls.retryButton} onClick={refetch}>
-                    <RefreshCcw size={14} /> Повторить
-                </button>
-            </div>
-        );
-    }
-
-    const currentList = tabs.find(t => t.id === activeTab)?.list ?? [];
+    useInfiniteScroll({
+        wrapperRef,
+        triggerRef,
+        callback: () => {
+            if (hasMore && !isFetching) {
+                loadNext();
+            }
+        },
+        disabled: isFetching,
+    });
+    if (isLoading) return <Skeleton width={1300} height={70} />;
 
     return (
-        <div className={classNames(cls.AlarmList, {}, [className])}>
-            <h3 className={cls.title}>Последние уведомления</h3>
-
-            <div className={cls.tabs}>
-                {tabs.map(tab => (
-                    <button
-                        key={tab.id}
-                        className={classNames(cls.tab, {
-                            [cls.tabActive]: activeTab === tab.id,
-                        })}
-                        onClick={() => setActiveTab(tab.id)}
-                    >
-                        {tab.label}
-                    </button>
-                ))}
-            </div>
-
+        <div className={className}>
+            <h3>Последние уведомления</h3>
             <ul className={cls.list}>
-                {currentList.length ? (
-                    currentList.map(alarm => (
-                        <AlarmItem key={alarm.id} alarm={alarm} />
-                    ))
-                ) : (
-                    <li className={cls.empty}>Нет уведомлений</li>
-                )}
+                {data.map((alarm) => (
+                    <AlarmListItem key={alarm.id} alarm={alarm} />
+                ))}
             </ul>
+            {isFetching
+                && (
+                    <>
+                        <Skeleton width={1500} height={50} />
+                        <Skeleton width={1500} height={50} />
+                        <Skeleton width={1500} height={50} />
+                    </>
+                )}
+
+            <div ref={triggerRef} />
         </div>
     );
-};
+});
