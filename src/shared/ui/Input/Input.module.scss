@@ -14,14 +14,19 @@
             margin-right: 6px;
             white-space: nowrap;
             opacity: 0.9;
+
         }
 
+
         .input {
-            // ... существующие стили
+            margin: 4px 0;
+
+
+
 
             &:focus {
                 // 1. Тонкая линия снизу — твой цвет #1a0b2e
-                box-shadow: 0 1px 0 0 var(--accent, #1a0b2e);
+                //box-shadow: 0 1px 0 0 var(--accent, #1a0b2e);
 
                 // 2. Плейсхолдер становится чуть ярче
                 &::placeholder {
@@ -33,19 +38,22 @@
 
         // 3. Плейсхолдер при фокусе — чуть темнее
         .placeholder {
-            transition: color 0.15s ease;
+
+            font: var(--font-l);
+            font-size: 20px;
+            color: var(--text-primary);
         }
 
         .input:focus ~ .placeholder {
             color: var(--text-primary, #1f2937);
             opacity: 1;
         }
+        .noneWrapper{
+
+        }
 
         // Полностью скрываем каретку и её обёртку
-        .caretWrapper,
-        .caret {
-            display: none !important;
-        }
+
     }
 
     // === АДАПТАЦИЯ ПОД РАЗМЕРЫ КАРТОЧКИ ===

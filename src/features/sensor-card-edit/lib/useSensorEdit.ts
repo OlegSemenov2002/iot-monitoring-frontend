@@ -31,15 +31,15 @@ export const useSensorEdit = (sensor: Sensor) => {
     const startEdit = useCallback(() => {
         setState(prev => ({
             ...prev,
-            form: { ...sensor },
+            form: { ...prev.form }, // ← берём последнюю известную версию
             isEditing: true,
             isDirty: false,
-            error: undefined,
         }));
-    }, [sensor]);
+    }, []);
 
     const updateField = useCallback(
         (field: keyof Sensor, value: any) => {
+
             setState(prev => {
                 const newForm = { ...prev.form, [field]: value };
                 return {
@@ -48,6 +48,8 @@ export const useSensorEdit = (sensor: Sensor) => {
                     isDirty: newForm[field] !== sensor[field],
                 };
             });
+
+
         },
         [sensor],
     );
@@ -81,6 +83,7 @@ export const useSensorEdit = (sensor: Sensor) => {
                 error: e?.message || 'Update failed',
             }));
         }
+
     }, [state.form, sensor]);
 
     return {

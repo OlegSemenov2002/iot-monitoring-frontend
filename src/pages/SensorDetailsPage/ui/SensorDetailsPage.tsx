@@ -11,6 +11,7 @@ import { Page } from 'shared/ui/Page/Page';
 import cls from './SensorDetailsPage.module.scss';
 import {useSensorEdit} from "features/sensor-card-edit/lib/useSensorEdit";
 import {Sensor} from "entities/Sensor";
+import {Text, TextAlign, TextTheme} from "shared/ui/Text/Text";
 
 interface SensorDetailsPageProps {
     className?: string;
@@ -35,17 +36,33 @@ const SensorDetailsPage = ({ className }: SensorDetailsPageProps) => {
         return <div>{t('Ошибка загрузки данных')}</div>;
     }
 
+    if(error || !sensor || edit.error){
+
+        return (
+            <Text
+                theme={TextTheme.ERROR}
+                align={TextAlign.CENTER}
+                title={t('Произошла ошибка при сохранении.')}
+            />
+        )
+
+    }
+
     return (
         <Page ref={pageRef}>
             <SensorCard
+                key={sensor.id}
                 view={SENSOR_CARD_VIEWS.FULL}
                 sensor={edit.form}
                 readonly={!edit.isEditing}
                 isDirty={edit.isDirty}
+                isSaving={edit.isSaving}
+                isEditing={edit.isEditing}
                 onChange={edit.updateField}
                 onEdit={edit.startEdit}
                 onSave={edit.save}
                 onCancel={edit.cancelEdit}
+                error={edit.error}
             />
 
             <AlarmList sensorId={Number(id)} wrapperRef={pageRef} />

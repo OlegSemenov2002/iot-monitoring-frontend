@@ -28,7 +28,6 @@ export const SensorTable = ({ className, sensors }:SensorTableProps) => {
                 <tr>
                     <th>#</th>
                     <th>Имя</th>
-                    <th>Тип</th>
                     <th>Последняя активность</th>
                     <th>Заряд</th>
                     <th>Уведомления</th>

@@ -9,6 +9,7 @@
   box-shadow: none; /* без тени */
   transition: none; /* без анимаций */
 
+
   h3 {
     margin: 0 0 12px;
     font-weight: 600;
@@ -64,6 +65,12 @@
     padding: 24px;
     height: 500px;
     width: 40%;
+
+    min-width: 600px;
+
+    .bigSwitch{
+      width: 20px;
+    }
 
     .__icon {
       width: 180px;
