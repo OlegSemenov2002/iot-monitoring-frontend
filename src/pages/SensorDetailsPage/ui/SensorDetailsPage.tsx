@@ -9,6 +9,8 @@ import { AlarmList } from 'widgets/AlarmList';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { Page } from 'shared/ui/Page/Page';
 import cls from './SensorDetailsPage.module.scss';
+import {useSensorEdit} from "features/sensor-card-edit/lib/useSensorEdit";
+import {Sensor} from "entities/Sensor";
 
 interface SensorDetailsPageProps {
     className?: string;
@@ -19,26 +21,33 @@ const SensorDetailsPage = ({ className }: SensorDetailsPageProps) => {
     const { id } = useParams<{ id: string }>();
 
     const { data: sensor, isLoading, error } = useGetSensorQuery(Number(id));
+
+
+    const edit = useSensorEdit(sensor ?? ({} as Sensor));
+
     const pageRef = useRef<HTMLDivElement | null>(null);
 
-
-    const handleScrollEnd = useCallback(() => {
-        console.log('SCROLL END'); // ← ПРОВЕРЬ В КОНСОЛИ
-    }, []);
-
     if (isLoading) {
-        return (
-            <Skeleton width={600} height={200} />
-        );
+        return <Skeleton width={600} height={200} />;
     }
-    if (error || !sensor) return <div>{t('Ошибка загрузки данных')}</div>;
 
-    const onScrollEnd = () => {
-
+    if (error || !sensor) {
+        return <div>{t('Ошибка загрузки данных')}</div>;
     }
+
     return (
         <Page ref={pageRef}>
-            <SensorCard view={SENSOR_CARD_VIEWS.FULL} sensor={sensor} />
+            <SensorCard
+                view={SENSOR_CARD_VIEWS.FULL}
+                sensor={edit.form}
+                readonly={!edit.isEditing}
+                isDirty={edit.isDirty}
+                onChange={edit.updateField}
+                onEdit={edit.startEdit}
+                onSave={edit.save}
+                onCancel={edit.cancelEdit}
+            />
+
             <AlarmList sensorId={Number(id)} wrapperRef={pageRef} />
         </Page>
     );

@@ -72,6 +72,13 @@ export const sensorApi = rtkApi
                     try { await queryFulfilled; } catch { patch.undo(); }
                 },
             }),
+            updateSensor: build.mutation<Sensor, { deviceId: number; data: Partial<Sensor> }>({
+                query: ({ deviceId, data }) => ({
+                    url: `/devices/${deviceId}`,
+                    method: 'PATCH',
+                    body: data,
+                }),
+            }),
         }),
 
     });
@@ -83,4 +90,5 @@ export const {
     useUpdateSensorNotifyMutation,
     useGetSensorConfigQuery,
     useUpdateSensorConfigMutation,
+    useUpdateSensorMutation
 } = sensorApi;

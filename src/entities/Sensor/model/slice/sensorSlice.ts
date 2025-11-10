@@ -11,7 +11,7 @@ const sensorSlice = createSlice({
     name: 'sensor',
     initialState: sensorAdapter.getInitialState(),
     reducers: {
-        // Пример ручного обновления
+
         updateSensor: sensorAdapter.updateOne,
         addSensor: sensorAdapter.addOne,
         removeSensor: sensorAdapter.removeOne,
