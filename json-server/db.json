@@ -18,6 +18,10 @@
       "postId": "1"
     }
   ],
+  "metrics": {
+    "newMonthUsers": 87,
+    "notificationsLastMonth": 1248
+  },
   "users": [
     {
       "id": "1",
@@ -44,13 +48,33 @@
       ]
     }
   ],
-  "profile": {
-    "id": "1",
-    "userId": "1",
-    "theme": "app_light_theme",
-    "lang": "Russian",
-    "currency": "RUB"
-  },
+  "profile": [
+    {
+      "id": "1",
+      "userId": "1",
+      "first": "John",
+      "lastname": "Svezer",
+      "age": 465,
+      "currency": "RUB",
+      "country": "Belarus",
+      "city": "Moscow",
+      "username": "admin213",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/8188/8188349.png",
+      "position": "VP of Administration"
+    },
+    {
+      "id": "2",
+      "userId": "2",
+      "first": "ulbi tv",
+      "lastname": "asf",
+      "age": 465,
+      "currency": "RUB",
+      "country": "Russia",
+      "city": "Moscow",
+      "username": "ulbi tv",
+      "avatar": "https://cdn-icons-png.flaticon.com/512/8188/8188349.png"
+    }
+  ],
   "userSettings": [
     {
       "userId": "1",
@@ -140,13 +164,28 @@
       "last_act": "2025-02-07 09:55:33",
       "battery": 96,
       "security_user_id": 1,
-      "description": "23",
-      "notify": 1,
+      "description": "rewrwewe34t43",
+      "notify": 0,
+      "loss": 0,
+      "type": 1
+    },
+    {
+      "id": 7,
+      "device_eui": "373536335c317f13",
+      "last_gateway_id": 7,
+      "first_act": "2025-01-14 19:52:58",
+      "auto_added": 1,
+      "last_act": "2025-02-07 09:55:33",
+      "battery": 96,
+      "security_user_id": 1,
+      "description": "tested",
+      "notify": 0,
       "loss": 0,
       "type": 1
     }
   ],
   "alarms": [
+
     {
       "id": 36957,
       "device_id": 6,
@@ -8849,6 +8888,15 @@
       "date_fix": "2025-08-18 13:23:32",
       "notify_lk": 0,
       "notify_sms": null
+    },
+    {
+      "id": 36958,
+      "device_id": 6,
+      "date_time": "2025-11-16T14:01:14.938Z",
+      "notify": 1,
+      "date_fix": null,
+      "notify_lk": 0,
+      "notify_sms": 0
     }
   ],
   "configs": [

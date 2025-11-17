@@ -1,23 +1,19 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
 const path = require('path');
-
 const server = jsonServer.create();
-
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
 
-// Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
+// имитация задержки
 server.use(async (req, res, next) => {
-    await new Promise((res) => {
-        setTimeout(res, 800);
-    });
+    await new Promise((res) => setTimeout(res, 800));
     next();
 });
 
-// Эндпоинт для логина
+// Логин
 server.post('/login', (req, res) => {
     try {
         const { username, password } = req.body;
@@ -28,9 +24,7 @@ server.post('/login', (req, res) => {
             (user) => user.username === username && user.password === password,
         );
 
-        if (userFromBd) {
-            return res.json(userFromBd);
-        }
+        if (userFromBd) return res.json(userFromBd);
 
         return res.status(403).json({ message: 'User not found' });
     } catch (e) {
@@ -39,14 +33,40 @@ server.post('/login', (req, res) => {
     }
 });
 
-// проверяем, авторизован ли пользователь
-// eslint-disable-next-line
+// проверка авторизации
 server.use((req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });
     }
-
     next();
+});
+
+// Генерация нового случайного сигнала
+server.post('/alarms/generate', (req, res) => {
+    try {
+        const dbPath = path.resolve(__dirname, 'db.json');
+        const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+        db.alarms = db.alarms || [];
+
+        const newAlarm = {
+            id: db.alarms.length ? Math.max(...db.alarms.map(a => a.id)) + 1 : 1,
+            device_id: Math.floor(Math.random() * 10) + 1, // устройство 1-10
+            date_time: new Date().toISOString(),
+            notify: Math.random() > 0.5 ? 1 : null,
+            date_fix: null,
+            notify_lk: 0,
+            notify_sms: Math.floor(Math.random() * 3) // 0,1,2
+        };
+
+        db.alarms.push(newAlarm);
+
+        fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf-8');
+
+        res.json(newAlarm);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
+    }
 });
 
 server.use(router);

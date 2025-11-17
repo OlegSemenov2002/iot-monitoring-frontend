@@ -11,7 +11,7 @@ import {Skeleton} from "shared/ui/Skeleton/Skeleton";
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {
         const element = (
-            <Suspense fallback={<Skeleton className={cls.skeleton} width="100%" height={700} />}>
+            <Suspense fallback={<Skeleton className={cls.skeleton} width="80%" height={700} />}>
                 {route.element}
             </Suspense>
         );

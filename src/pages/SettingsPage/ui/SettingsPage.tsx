@@ -20,6 +20,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { useTranslation } from 'react-i18next';
 import cls from './SettingsPage.module.scss';
+import {Page} from "shared/ui/Page/Page";
 
 interface SettingsPageProps {
     className?: string;
@@ -51,22 +52,22 @@ const SettingsPage = ({ className }: SettingsPageProps) => {
 
     if (isLoading) {
         return (
-            <div className={classNames(cls.SettingsCard, { [cls.loading]: true }, [className])}>
+            <Page>
                 <Loader />
-            </div>
+            </Page>
         );
     }
 
     if (error) {
         return (
-            <div className={classNames(cls.SettingsCard, {}, [className, cls.error])}>
+            <Page>
                 <Text
                     theme={TextTheme.ERROR}
                     title={t('Произошла ошибка при загрузке профиля')}
                     text={t('Попробуйте обновить страницу')}
                     align={TextAlign.CENTER}
                 />
-            </div>
+            </Page>
         );
     }
 
@@ -74,7 +75,8 @@ const SettingsPage = ({ className }: SettingsPageProps) => {
 
     const onChangeLang = (lang: AppLang) => dispatch(settingsActions.setForm({ lang }));
     return (
-        <div className={classNames('', {}, [className])}>
+
+        <Page>
             <SettingsPageHeader userId={userId} form={formData!} />
             <SettingsCard
                 data={formData}
@@ -82,7 +84,7 @@ const SettingsPage = ({ className }: SettingsPageProps) => {
                 onChangeLang={onChangeLang}
                 onChangeTheme={onChangeTheme}
             />
-        </div>
+        </Page>
     );
 };
 

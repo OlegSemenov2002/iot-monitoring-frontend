@@ -1,5 +1,5 @@
 // import { StateSchema } from 'app/providers/StoreProvider';
-// import { AppLang } from 'entities/Settings/model/types/settings';
+// import { AppLang } from 'entities/Settings/lib/types/settings';
 // import { Theme } from 'shared/const/ThemeTypes';
 // import { Currency } from 'entities/Currency';
 // import { getSettingsForm } from './getSettingsForm';

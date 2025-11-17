@@ -1,0 +1,19 @@
+.iotDashboard {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+}
+
+.CardsRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem; /* отступ между верхними карточками и графиком */
+}
+
+.ChartRow {
+  display: flex;
+  justify-content: center; /* чтобы график был по центру */
+}

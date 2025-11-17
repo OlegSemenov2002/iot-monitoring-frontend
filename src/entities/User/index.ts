@@ -4,9 +4,14 @@ export {
 export {
     getUserInited,
 } from './model/selectors/getUserInited/getUserInited';
-// export {
-//     isUserAdmin, isUserManager,
-// } from './model/selectors/getUserRole/roleSelectors';
+export {
+    selectMainRole,
+} from './model/selectors/getUserRole/roleSelectors';
+
+export {
+    getUserId,
+} from './model/selectors/getUserId/getUserId';
+
 export {
     userReducer,
     userActions,
@@ -15,4 +20,6 @@ export {
     UserSchema,
     User,
     UserRole,
+    ROLE_PRIORITIES,
+    ROLE_DISPLAY_NAMES,
 } from './model/types/user';

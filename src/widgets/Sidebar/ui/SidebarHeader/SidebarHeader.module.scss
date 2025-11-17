@@ -1,0 +1,25 @@
+.SidebarHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+
+
+
+
+
+  .username {
+    text-align: center;
+  }
+
+  .Role {
+    display: flex;
+    align-self: start;
+    text-align: left;
+    margin-top: 4px;
+  }
+}
+
+.miniLink{
+  margin-left: 10px;
+}

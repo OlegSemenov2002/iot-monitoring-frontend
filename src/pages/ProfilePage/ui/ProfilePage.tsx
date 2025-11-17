@@ -47,7 +47,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
 
     // 2) Запрос: объект с алиасами (+ skip, если id нет)
     const {
-        data: dataProfile, // было: data
+        data: dataProfile,
         isLoading: isLoadingProfile, // было: isLoading
         isError: isErrorProfile,
         error: getError,

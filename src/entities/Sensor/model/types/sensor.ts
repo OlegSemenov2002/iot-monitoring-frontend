@@ -27,7 +27,7 @@ export interface Ms0101Specific {
     auto_arming: boolean;
     timezone: string;
     send_auto_arming: boolean;
-    datetime: string;
+    date_time: string;
 }
 
 export interface OtherSpecific {
@@ -46,7 +46,7 @@ export type SensorId = Sensor['id'];
 export interface SensorAlarm {
     id:  | string;
     device_id: number | string;
-    datetime: string;
+    date_time: string;
     arming: boolean;
     date_fix: string | null;
     notify: boolean;
@@ -62,7 +62,7 @@ export interface SensorConfig {
     auto_arming: boolean;
     timezone: string | string;
     send_auto_arming: boolean;
-    datetime: string | string;
+    date_time: string | string;
 }
 
 

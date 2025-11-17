@@ -1,0 +1,55 @@
+.MetricCard {
+  background: #0a1b2d;
+  //border-radius: 12px;
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+
+
+  .TopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .IconTitle {
+    display: flex;
+    align-items: center;
+
+    .Icon {
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .Title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .CircleWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .BottomRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+
+    .Subtitle {
+      color: #4caf50;
+    }
+
+    .Increase {
+      font-style: italic;
+      color: #81c784;
+    }
+  }
+}

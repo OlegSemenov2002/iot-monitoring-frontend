@@ -9,20 +9,10 @@ export const profileApi = rtkApi
     .injectEndpoints({
         endpoints: (build) => ({
             getProfileData: build.query<Profile, string>({
-                query: (userId) => ({
-                    url: `/profile/${userId}`,
-                }),
+                query: (userId) => `/profile/${userId}`,
+                providesTags: (result, error, userId) => [{ type: 'Profile', id: userId }],
 
-                providesTags: (_res, _err, userId) => [{ type: 'Profile', id: userId }],
-
-                async onQueryStarted(userId, { queryFulfilled, dispatch }) {
-                    try {
-                        const { data } = await queryFulfilled;
-                    } catch (error:any) {
-
-                    }
-                },
-
+                keepUnusedDataFor: 60 * 60 * 24, // 24 часа
             }),
 
             updateProfile: build.mutation({

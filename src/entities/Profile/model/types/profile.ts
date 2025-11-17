@@ -11,6 +11,7 @@ export interface Profile {
     city?: string,
     username?: string;
     avatar?: string;
+    position?: string;
 }
 
 export interface ProfileSchema {

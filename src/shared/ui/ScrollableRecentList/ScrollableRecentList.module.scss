@@ -1,0 +1,43 @@
+.ScrollableRecentList {
+  background: #0a1b2d;
+  border: 1px solid #ddd;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  color:var(--bg-color);
+}
+
+.Title {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.Item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.ItemSkeleton {
+  margin-bottom: 8px;
+}
+
+.Empty {
+  text-align: center;
+  color: #999;
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #12263b;
+}
+::-webkit-scrollbar-thumb {
+  background:var(--bg-color);
+  border-radius: 3px;
+}

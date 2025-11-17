@@ -2,7 +2,7 @@
 // import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 // import {SENSOR_CARD_VIEWS, SensorCard} from './SensorCard';
 // import {DeepPartial} from "@reduxjs/toolkit";
-// import {Sensor} from "entities/Sensor/model/types/sensor";
+// import {Sensor} from "entities/Sensor/lib/types/sensor";
 //
 //
 // const sensor: Sensor = {

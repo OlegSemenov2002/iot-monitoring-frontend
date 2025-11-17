@@ -1,0 +1,35 @@
+.circle {
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  &.small {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.large {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.progress {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(#2196f3 0deg, #2196f3 0deg, transparent 0deg 360deg);
+  transition: background 1s ease; /* плавное заполнение */
+}
+
+.innerCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background-color: #032340; /* центральная маска */
+}

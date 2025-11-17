@@ -1,24 +1,39 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo, useMemo, useState } from 'react';
+import {
+    memo, useCallback, useMemo, useState,
+} from 'react';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
-import { getUserAuthData } from 'entities/User';
-import cls from './Sidebar.module.scss';
-import { SidebarItemsList } from '../../model/items';
+import { getUserAuthData, ROLE_DISPLAY_NAMES, selectMainRole } from 'entities/User';
+import { SidebarHeader } from 'widgets/Sidebar/ui/SidebarHeader/SidebarHeader';
+import { Profile} from 'entities/Profile';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Loader } from 'lucide-react';
+import { t } from 'i18next';
+import { Text } from 'shared/ui/Text/Text';
+
 import { SidebarItem } from '../SidebarItem/SidebarItem';
+import { SidebarItemsList } from '../../model/items';
+import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
     className?: string;
+    profile?: Profile;
 }
 
-export const Sidebar = memo(({ className }: SidebarProps) => {
+export const Sidebar = memo(({ className, profile }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
 
-    const onToggle = () => {
+
+
+    const mainRole = useSelector(selectMainRole);
+    const mainRoleName = ROLE_DISPLAY_NAMES[mainRole];
+
+    const onToggle = useCallback(() => {
         setCollapsed((prev) => !prev);
-    };
+    }, [setCollapsed]);
 
     const itemsList = useMemo(() => SidebarItemsList.map((item) => (
         <SidebarItem
@@ -28,11 +43,18 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         />
     )), [collapsed]);
 
+
     return (
+
         <menu
             data-testid="sidebar"
             className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [className])}
         >
+            <SidebarHeader
+                profile={profile}
+                mainRoleName={mainRoleName}
+                collapsed={collapsed}
+            />
             <Button
                 data-testid="sidebar-toggle"
                 onClick={onToggle}
