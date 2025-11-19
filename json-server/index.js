@@ -50,12 +50,12 @@ server.post('/alarms/generate', (req, res) => {
 
         const newAlarm = {
             id: db.alarms.length ? Math.max(...db.alarms.map(a => a.id)) + 1 : 1,
-            device_id: Math.floor(Math.random() * 10) + 1, // устройство 1-10
+            device_id: Math.floor(Math.random() * 10) + 1,
             date_time: new Date().toISOString(),
             notify: Math.random() > 0.5 ? 1 : null,
             date_fix: null,
             notify_lk: 0,
-            notify_sms: Math.floor(Math.random() * 3) // 0,1,2
+            notify_sms: Math.floor(Math.random() * 3)
         };
 
         db.alarms.push(newAlarm);

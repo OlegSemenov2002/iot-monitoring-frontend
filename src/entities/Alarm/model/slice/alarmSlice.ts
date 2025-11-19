@@ -11,7 +11,7 @@ const alarmSlice = createSlice({
     name: 'alarm',
     initialState: alarmAdapter.getInitialState(),
     reducers: {
-        // Пример ручного обновления
+
         updateAlarm: alarmAdapter.updateOne,
         addAlarm: alarmAdapter.addOne,
         removeAlarm: alarmAdapter.removeOne,

@@ -1,10 +1,10 @@
 .ScrollableRecentList {
-  background: #0a1b2d;
-  border: 1px solid #ddd;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 300px;
-  color:var(--bg-color);
+  color: var(--text-primary);
 }
 
 .Title {
@@ -15,7 +15,8 @@
 
 .Item {
   padding: 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--card-border);
+
   &:last-child {
     border-bottom: none;
   }
@@ -27,17 +28,19 @@
 
 .Empty {
   text-align: center;
-  color: #999;
+  color: var(--text-secondary);
 }
 
-
+/* скроллбар под палитру */
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #12263b;
+  background: var(--card-bg);
 }
+
 ::-webkit-scrollbar-thumb {
-  background:var(--bg-color);
+  background: var(--accent);
   border-radius: 3px;
 }

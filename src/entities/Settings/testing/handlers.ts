@@ -1,4 +1,4 @@
-// src/entities/Settings/testing/mswHandlers.ts
+
 import { delay, http, HttpResponse } from 'msw';
 import { AppLang, UserSettings } from 'entities/Settings/model/types/settings';
 import { Theme } from 'shared/const/ThemeTypes';

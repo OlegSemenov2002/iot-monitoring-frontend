@@ -29,7 +29,6 @@ interface MainPageProps{
 }
 
 
-
 const MainPage = ({className}: MainPageProps) => {
     const { t } = useTranslation();
     const { getMetric, isLoading: isLoadingMetrics } = useGetAllMetrics();
@@ -37,7 +36,6 @@ const MainPage = ({className}: MainPageProps) => {
     const newUsers = getMetric(METRIC_TYPE.NewMonthUsers);
     const notifications = getMetric(METRIC_TYPE.NotificationsLastMonth);
 
-    // State для диапазона дат
     const [chartRange, setChartRange] = useState<DateRange>({
         from: '2025-08-27',
         to: '2025-09-05',
@@ -55,32 +53,33 @@ const MainPage = ({className}: MainPageProps) => {
 
 
     // if (isLoadingSensorsChart) {
-    //     return <div>Loading...</div>; // показываем индикатор загрузки
+    //     return <div>Loading...</div>;
     // }
     //
     // if (error) {
     //     if ('status' in error) {
-    //         // Серверная ошибка
+    //
     //         return <div>Error {error.status}: {JSON.stringify(error.data)}</div>;
     //     } else {
-    //         // Клиентская ошибка (например network)
+    //
     //         return <div>Error: {error.toString()}</div>;
     //     }
     // }
 
-    console.log(chartData); // данные точно есть, когда isLoading === false
+
+
     return (
         <Page className={cls.Dashboard}>
             <div className={cls.CardsRow}>
                 <MetricCard
-                    title="New Clients (This Month)"
+                    title={t('New Clients (This Month)')}
                     value={newUsers ?? 0}
                     maxValue={200}
                     increase={`+${newUsers ?? 0}`}
                     loading={isLoading}
                 />
                 <MetricCard
-                    title="Notifications (Last Month)"
+                    title={t('Notifications (Last Month)')}
                     value={notifications ?? 0}
                     maxValue={10000}
                     increase={`+${notifications ?? 0}`}
@@ -90,7 +89,7 @@ const MainPage = ({className}: MainPageProps) => {
 
             <div className={cls.CardsRow}>
                 <MetricChartCard
-                    title="Notifications per Device (Last 7 days)"
+                    title={t('Notifications per Device (Last 7 days)')}
                     loading={isLoading}
                     data={chartData}
                     width={1200}
@@ -99,7 +98,7 @@ const MainPage = ({className}: MainPageProps) => {
                     onRangeChange={setChartRange}
                 />
                 <ScrollableRecentList<SensorAlarm>
-                    title="Последние уведомления"
+                    title={t('Last notifications')}
                     items={recentAlarms}
                     isLoading={isLoadingAlarms}
                     maxItems={15}

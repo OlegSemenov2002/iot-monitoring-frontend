@@ -3,7 +3,7 @@ import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 export const rtkApi = createApi({
     baseQuery: fetchBaseQuery({
-        baseUrl: __API__, // укажите ваш базовый URL
+        baseUrl: __API__,
         prepareHeaders: (headers) => {
             const token = localStorage.getItem(USER_LOCALSTORAGE_KEY);
             if (token) {

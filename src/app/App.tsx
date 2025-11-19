@@ -29,7 +29,7 @@ function App() {
     const userId = useSelector(getUserId);
 
     const { data: profile } = useGetProfileDataQuery(
-        userId ?? skipToken, // ⚡️ запрос только если userId есть
+        userId ?? skipToken,
         {
             refetchOnMountOrArgChange: false,
             refetchOnReconnect: false,

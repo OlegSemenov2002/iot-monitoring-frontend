@@ -1,4 +1,4 @@
-// // useInfiniteScroll.test.ts
+
 // import { renderHook, act } from '@testing-library/react-hooks';
 // import { useInfiniteScroll } from './useInfiniteScroll';
 // import {MutableRefObject, useCallback, useState} from 'react';

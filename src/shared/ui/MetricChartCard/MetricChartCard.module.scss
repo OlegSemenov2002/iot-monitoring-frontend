@@ -1,7 +1,7 @@
 .MetricChartCard {
   padding: 16px;
-  background: #0a1b2d;
-  color:var(--bg-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 

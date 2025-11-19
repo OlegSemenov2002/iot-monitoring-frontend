@@ -1,16 +1,21 @@
 .AlarmList {
   width: 100%;
-  background: #f6f8fa;
-  border-radius: 16px;
+  background: var(--card-bg);
+  border-radius: 0;                       /* убрали радиус */
+  border: 1px solid var(--card-border);
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: none;                       /* без тени */
+  color: var(--text-primary);
 }
 
+.skeleton{
+  margin-top: 10px;
+}
 .title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
-
+  color: var(--accent);
 }
 
 .tabs {
@@ -21,22 +26,23 @@
 
 .tab {
   padding: 8px 14px;
-  border: 1px solid #cfd6de;
+  border: 1px solid var(--card-border);
   border-radius: 8px;
-  background: #fff;
+  background: transparent;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 14px;
+  color: var(--text-secondary);
 
   &:hover {
-    background: #eef2f7;
+    background: rgba(255, 255, 255, 0.03);
   }
 }
 
 .tabActive {
-  background: #007aff;
-  //color: #fff;
-  border-color: #007aff;
+  background: var(--accent);
+  color: var(--card-bg);
+  border-color: var(--accent);
 }
 
 .list {
@@ -45,28 +51,27 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .alarmItem {
   display: flex;
   align-items: flex-start;
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px 16px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s;
-  //height: 10vh;
+  background: transparent;
+  border-radius: 0;                        /* без радиуса */
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--card-border);
+  box-shadow: none;
+  transition: background 0.2s;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    background: radial-gradient(circle at left, rgba(26, 11, 46, 0.45), transparent);
   }
 }
 
 .iconBox {
   flex-shrink: 0;
-  color: #ffbb33;
+  color: var(--accent-color);              /* жёлтый акцент */
   margin-right: 10px;
   margin-top: 2px;
 }
@@ -83,11 +88,11 @@
 }
 
 .device {
-  color: #222;
+  color: var(--text-primary);
 }
 
 .date {
-  color: #7a869a;
+  color: var(--text-secondary);
 }
 
 .statuses {
@@ -101,7 +106,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #7a869a;
+  color: var(--text-secondary);
   transition: color 0.2s;
 
   svg {
@@ -111,23 +116,23 @@
 }
 
 .active {
-  color: #007aff;
+  color: var(--accent);                    /* активное состояние */
 }
 
 .fixed {
-  opacity: 0.75;
-  background: #f4f6f8;
+  opacity: 0.85;
+  background: rgba(148, 163, 184, 0.08);
 }
 
 .dateFix {
   margin-top: 4px;
   font-size: 12px;
-  color: #868e96;
+  color: var(--text-secondary);
 }
 
 .empty {
   text-align: center;
-  color: #999;
+  color: var(--text-secondary);
   padding: 20px;
 }
 
@@ -138,15 +143,15 @@
   align-items: center;
   gap: 6px;
   padding: 20px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .retryButton {
   margin-left: 8px;
   padding: 6px 10px;
   border-radius: 6px;
-  background: #007aff;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--card-bg);
   border: none;
   cursor: pointer;
   display: inline-flex;
@@ -155,6 +160,6 @@
   font-size: 13px;
 
   &:hover {
-    background: #0066d4;
+    background: var(--accent);
   }
 }

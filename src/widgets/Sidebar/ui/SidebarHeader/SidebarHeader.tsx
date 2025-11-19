@@ -30,9 +30,6 @@ export const SidebarHeader = memo(({
 
         return (
             <div className={classNames(cls.SidebarHeader, {}, [className])}>
-                <Text className={cls.Role} title={mainRoleName}/>
-
-
             </div>
         );
 
@@ -45,7 +42,7 @@ export const SidebarHeader = memo(({
               <AppLink to={RoutePath.profile} className={cls.miniLink}>
                 <Avatar
                     src={profile.avatar}
-                    size={60}
+                    size={50}
                     className={cls.miniavatar}
                 />
             </AppLink>
@@ -55,7 +52,7 @@ export const SidebarHeader = memo(({
 
     return (
         <div className={classNames(cls.SidebarHeader, {}, [className])}>
-            <Text className={cls.Role} title={mainRoleName}/>
+            <Text className={cls.Role} text={mainRoleName}/>
             <AppLink to={RoutePath.profile} className={cls.profileLink}>
                 <Avatar
                     src={profile.avatar}

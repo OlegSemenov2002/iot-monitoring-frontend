@@ -1,9 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { Sensor } from 'entities/Sensor/model/types/sensor';
-import { Switch } from 'shared/ui/Switch/Switch';
-import { Table } from 'shared/ui/Table/Table';
 import React from 'react';
+import { Table } from 'shared/ui/Table/Table';
 import cls from './SensorTable.module.scss';
 import { SensorRow } from './SensorRow';
 
@@ -12,30 +11,28 @@ interface SensorTableProps {
     sensors?: Sensor[];
 }
 
-export const SensorTable = ({ className, sensors }:SensorTableProps) => {
+export const SensorTable = ({ className, sensors }: SensorTableProps) => {
     const { t } = useTranslation();
-    let content;
+    let content = null;
 
     if (sensors) {
-        content = (sensors?.map((sensor) => (
+        content = sensors.map((sensor) => (
             <SensorRow key={sensor.id} sensor={sensor} />
-        )));
+        ));
     }
 
     return (
-        <Table>
+        <Table className={classNames(cls.SensorTable, {}, [className])}>
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Имя</th>
-                    <th>Последняя активность</th>
-                    <th>Заряд</th>
-                    <th>Уведомления</th>
-                </tr>
+            <tr>
+                <th>#</th>
+                <th>{t('Имя')}</th>
+                <th>{t('Последняя активность')}</th>
+                <th>{t('Заряд')}</th>
+                <th>{t('Уведомления')}</th>
+            </tr>
             </thead>
-            <tbody>
-                {content}
-            </tbody>
+            <tbody>{content}</tbody>
         </Table>
     );
 };

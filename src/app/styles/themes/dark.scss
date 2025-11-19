@@ -1,8 +1,34 @@
 .app_dark_theme {
-    --bg-color: #090949;
-    --inverted-bg-color: #e8e8ea;
-    --primary-color: #04ff04;
-    --secondary-color: #049604;
-    --inverted-primary-color: #0232c2;
-    --inverted-secondary-color: #0452ff;
+    /* Базовые фоны */
+    --bg-color: #020617;              /* почти чёрный, но с синим оттенком */
+    --inverted-bg-color: #3d0673;     /* светлый фон для инвертированных блоков */
+
+    /* Основные акценты */
+    --primary-color: #22c5dc;         /* спокойный бирюзовый (кнопки/линки) */
+    --secondary-color: #e7e769;       /* серый для текста/бордеров */
+    --inverted-primary-color: #dadee5;/* тёмный текст на светлом фоне */
+    --inverted-secondary-color: #258721;
+
+    /* Текст */
+    --text-color: #e5e7eb;            /* светло-серый текст на тёмном фоне */
+
+    /* Акценты состояний (IoT) */
+    --accent-color: #fbbf24;          /* предупреждения / важные данные */
+    /* можешь ещё завести, если есть:
+       --success-color: #22c55e;
+       --danger-color:  #f97373;
+    */
+
+    /* Карточки / панели */
+    --card-bg: #060f2f;               /* сливается с фоном — "монолитный" дашборд */
+    --card-border: #73819d;           /* лёгкая граница */
+    --card-hover-border: #1a0b2e;     /* твой фиолетовый при hover */
+    --text-primary: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --accent: #22c5dc;                /* основной акцент на тёмном */
+    --accent-light: #38bdf8;          /* чуть ярче для иконок/чипов */
+
+    /* skeleton */
+    --skeleton-color: #111827;
+    --skeleton-shadow: rgba(0, 0, 0, 0.5);
 }

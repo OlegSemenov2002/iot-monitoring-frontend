@@ -5,7 +5,7 @@ import cls from './ScrollableContainer.module.scss';
 interface ScrollableContainerProps {
     className?: string;
     children: React.ReactNode;
-    height?: number; // px
+    height?: number;
 }
 
 export const ScrollableContainer: React.FC<ScrollableContainerProps> = ({

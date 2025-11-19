@@ -26,6 +26,6 @@ export const useToggleSensorNotify = () => {
     return {
         toggleNotify,
         isLoadingToggle,
-        optimisticNotify, // ← вот это нужно вернуть
+        optimisticNotify,
     };
 };

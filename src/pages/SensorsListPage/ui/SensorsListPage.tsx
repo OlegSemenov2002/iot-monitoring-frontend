@@ -30,22 +30,13 @@ const SensorsListPage = () => {
             <>
 
                 <Page>
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
-                    <Skeleton className={cls.skeleton} width="100%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
+                    <Skeleton className={cls.skeleton} width="95%" height={50} />
                 </Page>
-
-
-
-
-
-
-
-
-
-
-
 
             </>
         );

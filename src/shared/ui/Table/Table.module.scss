@@ -1,24 +1,42 @@
-// shared/ui/Table.module.scss
+
 .tableAuto {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.45);
+}
 
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
+.tableAuto thead tr {
+  background: var(--inverted-bg-color);
+}
 
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
+.tableAuto th,
+.tableAuto td {
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+  font-size: 14px;
+}
 
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
+.tableAuto th {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--inverted-primary-color);
+}
 
-  tr:hover {
-    background-color: #f1f1f1;
-  }
+
+.tableAuto tbody tr {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.tableAuto tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.tableAuto tbody tr:hover {
+  background: radial-gradient(circle at left, rgba(26, 11, 46, 0.6), transparent);
+  transform: translateY(-1px);
 }

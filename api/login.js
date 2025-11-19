@@ -1,4 +1,3 @@
-// api/login.js
 const fs = require('fs');
 const path = require('path');
 const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../db.json'), 'UTF-8'));

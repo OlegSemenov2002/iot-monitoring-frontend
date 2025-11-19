@@ -1,34 +1,35 @@
 .MetricCard {
-  background: #0a1b2d;
-  //border-radius: 12px;
+  background: var(--card-bg);
   padding: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #fff;
-
+  color: var(--text-primary);
 
   .TopRow {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 8px;
   }
 
   .IconTitle {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex: 1;
 
     .Icon {
       margin-right: 8px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      margin-top: 2px;
     }
 
     .Title {
       font-size: 16px;
       font-weight: bold;
+      line-height: 1.2;
     }
   }
 
@@ -36,6 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    align-self: flex-start;
   }
 
   .BottomRow {
@@ -44,12 +46,12 @@
     font-size: 14px;
 
     .Subtitle {
-      color: #4caf50;
+      color: var(--secondary-color);
     }
 
     .Increase {
       font-style: italic;
-      color: #81c784;
+      color: var(--inverted-secondary-color);
     }
   }
 }

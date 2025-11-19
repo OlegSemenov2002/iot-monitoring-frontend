@@ -1,4 +1,3 @@
-// config/jest/setupTests.ts
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 
@@ -12,15 +11,14 @@ mockIntersectionObserver.mockImplementation((callback) => {
         root: null,
         rootMargin: '',
         thresholds: [],
-        // Для теста
+
         __callback: callback,
     };
-    // Сохраняем экземпляр
     mockIntersectionObserver.mock.instances.push(instance);
     return instance;
 });
 
-// Инициализация
+
 mockIntersectionObserver.mock.instances = [];
 
 Object.defineProperty(window, 'IntersectionObserver', {

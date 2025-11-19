@@ -26,10 +26,10 @@ describe('updateUserSettings.test', () => {
 
         const thunk = new TestAsyncThunk(updateUserSettings, initialState);
 
-        // мок запроса
+
         thunk.api.put.mockResolvedValue({ data: { id: '1', userId: '1', ...initialState.settings!.form! } });
 
-        // если аргументов нет — вызываем без них
+
         const result = await thunk.callThunk();
 
         expect(thunk.api.put).toHaveBeenCalled();

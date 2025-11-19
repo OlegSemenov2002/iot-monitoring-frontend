@@ -1,3 +1,20 @@
-.SensorRow{
 
+.SensorRow {
+  cursor: pointer;
+}
+
+.SensorRow td {
+  vertical-align: middle;
+}
+
+/* ссылки на датчики */
+.SensorRow a {
+  color: var(--accent-light);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.SensorRow a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }

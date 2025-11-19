@@ -1,13 +1,13 @@
-import {classNames, Mods} from 'shared/lib/classNames/classNames';
-import {useTranslation} from 'react-i18next';
-import {Sensor} from 'entities/Sensor/model/types/sensor';
+import { classNames, Mods } from 'shared/lib/classNames/classNames';
+import { useTranslation } from 'react-i18next';
+import { Sensor } from 'entities/Sensor/model/types/sensor';
 import cls from './SensorCard.module.scss';
-import {Button, ButtonSize, ButtonTheme} from "shared/ui/Button/Button";
-import {Input, INPUT_VIEWS} from "shared/ui/Input/Input";
-import React, {useCallback, useEffect, useState} from "react";
-import {Text, TextAlign, TextTheme} from "shared/ui/Text/Text";
-import {Switch, SWITCH_SIZE} from "shared/ui/Switch/Switch";
-import {useToggleSensorNotify} from "features/SensorNotifications";
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { Input, INPUT_VIEWS } from 'shared/ui/Input/Input';
+import React, { useCallback } from 'react';
+import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
+import { Switch, SWITCH_SIZE } from 'shared/ui/Switch/Switch';
+import { useToggleSensorNotify } from 'features/SensorNotifications';
 
 export const SENSOR_CARD_VIEWS = {
     FULL: 'full',
@@ -17,14 +17,12 @@ export const SENSOR_CARD_VIEWS = {
 
 export type SensorCardView = typeof SENSOR_CARD_VIEWS[keyof typeof SENSOR_CARD_VIEWS];
 
-
-
 interface SensorCardProps {
     className?: string;
     sensor: Sensor;
     view?: SensorCardView;
     readonly?: boolean;
-    form?:Sensor;
+    form?: Sensor;
     isDirty?: boolean;
     isSaving?: boolean;
     isEditing?: boolean;
@@ -35,7 +33,7 @@ interface SensorCardProps {
     error?: any;
 }
 
-export const SensorCard = (props:SensorCardProps) => {
+export const SensorCard = (props: SensorCardProps) => {
     const { t } = useTranslation();
     const {
         className,
@@ -55,121 +53,133 @@ export const SensorCard = (props:SensorCardProps) => {
 
     const { toggleNotify, isLoadingToggle, optimisticNotify } = useToggleSensorNotify();
 
-
-
-
-
-
-    const handleChangeDescription = useCallback((value: string) => {
-
-
-        onChange('description', value);
-    }, [onChange]);
+    const handleChangeDescription = useCallback(
+        (value: string) => {
+            onChange('description', value);
+        },
+        [onChange],
+    );
 
     const mods: Mods = {
         [cls[view]]: true,
     };
 
-    if(error){
-
+    if (error) {
         return (
             <Text
                 theme={TextTheme.ERROR}
                 align={TextAlign.CENTER}
                 title={t('Произошла ошибка при сохранении.')}
             />
-        )
-
+        );
     }
 
+    const notifyValue =
+        optimisticNotify[sensor.id] !== undefined
+            ? optimisticNotify[sensor.id]
+            : sensor.notify;
+
+    const batteryPercent = Math.max(0, Math.min(100, sensor.battery ?? 0));
 
     return (
         <div className={classNames(cls.SensorCard, mods, [className])}>
-            <div className={classNames(cls.SensorCard__header, mods, [className])}>
-                <h3>
-                    {t('Sensor')}
-                    {' '}
-                    #
-                    {sensor.id}
-                </h3>
-                <Switch
-                    checked={
-                        optimisticNotify[sensor.id] !== undefined
-                            ? optimisticNotify[sensor.id] > 0
-                            : sensor.notify > 0
-                    }
-                    onChange={() =>
-                        toggleNotify(
-                            sensor.id,
-                            optimisticNotify[sensor.id] !== undefined
-                                ? optimisticNotify[sensor.id]
-                                : sensor.notify
-                        )
-                    }
-                    disabled={isLoadingToggle(sensor.id)}
-                    size={SWITCH_SIZE.BIG}
-                />
-                {readonly
-                    ? (
-                        <Button
-                            className={cls.editBtn}
-                            theme={ButtonTheme.OUTLINE}
-                            onClick={onEdit}
-                            disabled={isSaving}
-                        >
-                            {t('Редактировать')}
-                        </Button>
-                    )
-                    : (
-                        <>
+            <div className={cls.headerRow}>
+                <div className={cls.titleBlock}>
+                    <span className={cls.titleLabel}>{t('Датчик')}</span>
+                    <span className={cls.titleValue}>#{sensor.id}</span>
+                </div>
+                <div className={cls.headerControls}>
+                    <div className={cls.notifyBlock}>
+                        <span className={cls.notifyLabel}>{t('Уведомления')}</span>
+                        <Switch
+                            checked={notifyValue > 0}
+                            onChange={() => toggleNotify(sensor.id, notifyValue)}
+                            disabled={isLoadingToggle(sensor.id)}
+                            size={SWITCH_SIZE.BIG}
+                        />
+                    </div>
+
+                    <div className={cls.actions}>
+                        {readonly ? (
                             <Button
                                 className={cls.editBtn}
-                                theme={ButtonTheme.OUTLINE_RED}
-                                onClick={onCancel}
-                                disabled={isSaving}
-                            >
-                                {t('Отменить')}
-                            </Button>
-                            <Button
-                                className={cls.saveBtn}
                                 theme={ButtonTheme.OUTLINE}
-                                onClick={onSave}
+                                onClick={onEdit}
                                 disabled={isSaving}
                             >
-                                {t('Сохранить')}
+                                {t('Редактировать')}
                             </Button>
-                        </>
-                    )}
-                <div className={classNames(cls.__icon, {}, [className])} />
+                        ) : (
+                            <>
+                                <Button
+                                    className={cls.editBtn}
+                                    theme={ButtonTheme.OUTLINE_RED}
+                                    onClick={onCancel}
+                                    disabled={isSaving}
+                                >
+                                    {t('Отменить')}
+                                </Button>
+                                <Button
+                                    className={cls.saveBtn}
+                                    theme={ButtonTheme.OUTLINE}
+                                    onClick={onSave}
+                                    disabled={isSaving}
+                                >
+                                    {t('Сохранить')}
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                </div>
+
+                <div className={cls.icon} />
             </div>
-            <div className={classNames(cls.SensorCard__body, mods, [className])}>
 
-                {
-                    !readonly &&
-                    <Input
-                        view={INPUT_VIEWS.IOT}
-                        value={sensor.description}
-                        placeholder={t('Description')}
-                        className={cls.input}
-                        onChange={handleChangeDescription}
-                        readonly={readonly}
-                    />
-                }
-                {
-                    readonly && <p>{t('Description')}: {sensor.description}</p>
-                }
-                {view !== SENSOR_CARD_VIEWS.MINIMAL && (
-                    <>
-                        <p>{t('Device EUI')}: {sensor.device_eui}</p>
-                        <p>{t('Last Activity')}: {sensor.last_act}</p>
-                    </>
-                )}
+            <div className={cls.contentRow}>
+                <div className={cls.detailsCard}>
+                    <div className={cls.detailsHeader}>{t('Details')}</div>
 
-                <p>{t('Battery')}: {sensor.battery}%</p>
+                    <div className={cls.detailsGrid}>
+                        <div className={cls.detailsLabel}>{t('Имя')}</div>
+                        <div className={cls.detailsValue}>
+                            {!readonly ? (
+                                <Input
+                                    view={INPUT_VIEWS.IOT}
+                                    value={form.description}
+                                    placeholder={t('Description')}
+                                    className={cls.input}
+                                    onChange={handleChangeDescription}
+                                    readonly={false}
+                                />
+                            ) : (
+                                form.description || '—'
+                            )}
+                        </div>
 
+                        <div className={cls.detailsLabel}>{t('Последняя активность')}</div>
+                        <div className={cls.detailsValue}>
+                            {sensor.last_act || '—'}
+                        </div>
 
+                        <div className={cls.detailsLabel}>Device EUI</div>
+                        <div className={cls.detailsValue}>
+                            {sensor.device_eui || '—'}
+                        </div>
 
-
+                        <div className={cls.detailsLabel}>{t('Заряд')}</div>
+                        <div className={cls.detailsValue}>
+                            <div className={cls.batteryValue}>
+                                <span className={cls.batteryText}>{batteryPercent}%</span>
+                                <div className={cls.batteryBar}>
+                                    <div
+                                        className={cls.batteryBarFill}
+                                        style={{ width: `${batteryPercent}%` }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

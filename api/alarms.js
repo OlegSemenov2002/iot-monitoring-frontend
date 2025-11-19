@@ -1,4 +1,3 @@
-// api/alarms.js
 const db = require('../db.json');
 
 module.exports = (req, res) => {

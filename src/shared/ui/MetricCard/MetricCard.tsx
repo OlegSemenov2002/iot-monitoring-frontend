@@ -7,23 +7,23 @@ import cls from './MetricCard.module.scss';
 interface MetricCardProps {
     className?: string;
     icon?: React.ReactNode;
-    title: string;
-    value: number;
-    maxValue: number;
+    title?: string;
+    value?: number;
+    maxValue?: number;
     subtitle?: string | number;
     increase?: string | number;
     loading?: boolean;
 
 }
 export const MetricCard: React.FC<MetricCardProps> = ({
-                                                          className,
-                                                          icon,
-                                                          title,
-                                                          value = 0,
-                                                          maxValue = 100,
-                                                          increase,
-                                                          loading,
-                                                      }) => {
+    className,
+    icon,
+    title = 'Metric card title',
+    value = 0,
+    maxValue = 100,
+    increase,
+    loading,
+}) => {
 
 
     const CARD_WIDTH = 340;

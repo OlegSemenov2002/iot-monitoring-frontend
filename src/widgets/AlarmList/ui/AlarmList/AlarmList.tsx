@@ -1,24 +1,24 @@
-import React, {memo, MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
-import { useGetLastAlarmsPartlyByDeviceIdQuery } from 'shared/api/alarmApi';
-import {Alarm, AlarmListItem} from 'entities/Alarm';
+
+import { classNames } from 'shared/lib/classNames/classNames';
+import React, { memo, useRef } from 'react';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import cls from './AlarmList.module.scss';
-import {useInfiniteScroll} from "shared/lib/hooks/useInfiniteScroll/useInfiniteScroll";
-import {usePageAlarms} from "features/AlarmList/lib/useGetPageAlarms";
+import { useInfiniteScroll } from 'shared/lib/hooks/useInfiniteScroll/useInfiniteScroll';
+import { usePageAlarms } from 'features/AlarmList/lib/useGetPageAlarms';
+import { AlarmListItem } from 'entities/Alarm';
+import {useTranslation} from "react-i18next";
 
 interface AlarmListProps {
     className?: string;
     sensorId: number;
     onLoadNextAlarm?: () => void;
-    wrapperRef?: MutableRefObject<HTMLDivElement | null>;
+    wrapperRef?: React.MutableRefObject<HTMLDivElement | null>;
 }
 
-
-
-
-export const AlarmList = memo(({ className, sensorId,wrapperRef }: AlarmListProps) => {
-    const { data, isLoading, isFetching, error, hasMore, loadNext } = usePageAlarms({ deviceId: sensorId });
+export const AlarmList = memo(({ className, sensorId, wrapperRef }: AlarmListProps) => {
+    const { data, isLoading, isFetching, hasMore, loadNext } = usePageAlarms({ deviceId: sensorId });
     const triggerRef = useRef<HTMLDivElement | null>(null);
+    const {t} = useTranslation();
 
     useInfiniteScroll({
         wrapperRef,
@@ -30,24 +30,31 @@ export const AlarmList = memo(({ className, sensorId,wrapperRef }: AlarmListProp
         },
         disabled: isFetching,
     });
-    if (isLoading) return <Skeleton width={1300} height={70} />;
+
+    if (isLoading) return (
+        <>
+            <Skeleton className={cls.skeleton} width={1500} height={50} />
+            <Skeleton className={cls.skeleton} width={1500} height={50} />
+            <Skeleton className={cls.skeleton} width={1500} height={50} />
+        </>
+    );
 
     return (
-        <div className={className}>
-            <h3>Последние уведомления</h3>
+        <div className={classNames(cls.AlarmList, {}, [className])}>
+            <h3 className={cls.title}>{t('Последние уведомления')}</h3>
             <ul className={cls.list}>
                 {data.map((alarm) => (
                     <AlarmListItem key={alarm.id} alarm={alarm} />
                 ))}
             </ul>
-            {isFetching
-                && (
-                    <>
-                        <Skeleton width={1500} height={50} />
-                        <Skeleton width={1500} height={50} />
-                        <Skeleton width={1500} height={50} />
-                    </>
-                )}
+
+            {isFetching && (
+                <>
+                    <Skeleton className={cls.skeleton} width={1500} height={50} />
+                    <Skeleton className={cls.skeleton} width={1500} height={50} />
+                    <Skeleton className={cls.skeleton} width={1500} height={50} />
+                </>
+            )}
 
             <div ref={triggerRef} />
         </div>

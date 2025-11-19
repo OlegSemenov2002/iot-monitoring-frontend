@@ -1,13 +1,15 @@
 import {Alarm} from "entities/Alarm";
-import cls from "widgets/AlarmList/ui/AlarmList/AlarmList.module.scss";
+import cls from "./AlarmList.module.scss";
 import React from "react";
 
 export function AlarmListItem({ alarm }: { alarm: Alarm }) {
     return (
         <li className={cls.alarmItem}>
-            <div>#{alarm.id}</div>
-            <div>{alarm.date_time}</div>
-            <div>{alarm.date_fix ? 'Исправлено' : 'Активно'}</div>
+            <div className={cls.id}># {alarm.id} / </div>
+            <div className={cls.dateTime}>{alarm.date_time} / </div>
+            <div className={cls.status}>
+                {alarm.date_fix ? "Исправлено" : "Активно"}
+            </div>
         </li>
     );
 }

@@ -29,7 +29,7 @@ const SensorDetailsPage = ({ className }: SensorDetailsPageProps) => {
     const pageRef = useRef<HTMLDivElement | null>(null);
 
     if (isLoading) {
-        return <Skeleton width={600} height={200} />;
+        return <Skeleton className={cls.skeleton} width={'40%'} height={400} />;
     }
 
     if (error || !sensor) {

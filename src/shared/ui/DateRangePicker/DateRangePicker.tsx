@@ -1,7 +1,7 @@
-// shared/ui/DateRangePicker/DateRangePicker.tsx
 import React, { useState, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './DateRangePicker.module.scss';
+import {useTranslation} from "react-i18next";
 
 export type DateRange = { from: string; to: string }; // Общий тип, только from/to (без lastDays, чтобы не привязываться к фиче)
 
@@ -16,6 +16,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     onChange,
     className,
 }) => {
+    const { t } = useTranslation();
     const [fromDate, setFromDate] = useState(initialRange.from || '');
     const [toDate, setToDate] = useState(initialRange.to || '');
     const [error, setError] = useState('');
@@ -34,7 +35,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     return (
         <div className={classNames(cls.DateRangePicker, {}, [className])}>
             <label>
-                От:
+                {t('From')+':'}
                 <input
                     type="date"
                     value={fromDate}
@@ -43,7 +44,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
                 />
             </label>
             <label>
-                До:
+                {t('To')+':'}
                 <input
                     type="date"
                     value={toDate}

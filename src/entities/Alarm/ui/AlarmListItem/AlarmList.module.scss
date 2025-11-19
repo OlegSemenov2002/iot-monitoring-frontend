@@ -1,0 +1,20 @@
+.alarmItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  list-style: none;
+}
+
+
+.id {
+  min-width: 50px;
+}
+
+.dateTime {
+  min-width: 150px;
+}
+
+.status {
+
+}

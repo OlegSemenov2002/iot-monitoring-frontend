@@ -1,150 +1,165 @@
 .SensorCard {
-  padding: 16px;
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
+  width: 50%;
+  margin-bottom: 20px;
   background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0;
+  padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   color: var(--text-primary);
-  box-shadow: none; /* без тени */
-  transition: none; /* без анимаций */
 
-
-  h3 {
-    margin: 0 0 12px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .SensorCard__header {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 16px;
-
-    h3 {
-      margin: 0;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .SensorCard__button {
-      display: flex;
-      flex: 1;
-      background-color: #2f47ff;
-
-    }
-  }
-
-  .__icon {
-    background: linear-gradient(135deg, var(--accent-light), var(--accent));
-    color: white;
-    border-radius: 10px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-  }
-
-  .SensorCard__body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    p {
-      flex: 1;
-      margin: 4px 0;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-  }
-
-  /* === РАЗМЕРЫ — без анимаций === */
   &.full {
-    padding: 24px;
-    height: 500px;
-    width: 40%;
-
-    min-width: 600px;
-
-    .bigSwitch{
-      width: 20px;
-    }
-
-    .__icon {
-      width: 180px;
-      height: 180px;
-      font-size: 3em;
-    }
-
-    .SensorCard__header { flex: 2; }
-    .SensorCard__header h3 {
-      font: var(--font-xl);
-      font-size: 28px;
-    }
-
-    .SensorCard__body p {
-      font: var(--font-l);
-      font-size: 20px;
-      color: var(--text-primary);
-    }
   }
 
   &.compact {
-    padding: 20px;
-    height: 300px;
-    width: 30%;
-
-    .__icon {
-      width: 90px;
-      height: 90px;
-      font-size: 1.8em;
-    }
-
-    .SensorCard__header { flex: 2; gap: 8px; }
-    .SensorCard__header h3 { font: var(--font-l); }
-
-    .SensorCard__body p {
-      font: var(--font-m);
-      color: var(--text-primary);
-    }
   }
 
   &.minimal {
-    padding: 12px;
-    height: 150px;
-    width: 20%;
+    padding: 16px 24px;
 
-    .__icon {
-      width: 44px;
-      height: 44px;
-      font-size: 1em;
-    }
-
-    .SensorCard__header {
-      flex: 0.7;
-      gap: 6px;
-      align-items: center;
-    }
-    .SensorCard__header h3 {
-      font: var(--font-m);
-      font-size: 15px;
-    }
-    .SensorCard__body p {
-      flex: 4;
-      font: var(--font-s, 13px);
-      font-size: 13px;
-      color: var(--text-secondary);
+    .icon {
+      width: 96px;
+      height: 96px;
     }
   }
 }
 
-.dirtyDot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--accent, #1a0b2e);
-  border-radius: 50%;
-  margin-left: 6px;
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 200px;
+}
+
+.titleLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.titleValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.headerControls {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.notifyBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.notifyLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn,
+.saveBtn {
+  white-space: nowrap;
+}
+
+.icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #4b2cff, #7f2cff);
+  box-shadow: 0 20px 45px rgba(76, 32, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.contentRow {
+  border-top: 1px solid var(--card-border);
+  padding-top: 20px;
+  display: flex;
+}
+
+.detailsCard {
+  flex: 1;
+  max-width: 720px;
+}
+
+.detailsHeader {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  column-gap: 32px;
+  row-gap: 12px;
+  font-size: 14px;
+}
+
+.detailsLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  align-self: center;
+}
+
+.detailsValue {
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+}
+
+.batteryValue {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.batteryText {
+  font-weight: 500;
+}
+
+.batteryBar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.batteryBarFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #26c281, #f2c94c);
 }

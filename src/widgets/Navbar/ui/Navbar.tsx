@@ -42,17 +42,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
                     {t('Выйти')}
                 </Button>
 
-                <div>
-                    <AppLink
-                        theme={AppLinkTheme.SECONDARY}
-                        to={RoutePath.admin_panel}
-                        className={classNames('', {}, [])}
-                    >
-                        <span className={cls.link}>
-                            {t('Админка')}
-                        </span>
-                    </AppLink>
-                </div>
+
             </div>
         );
     }

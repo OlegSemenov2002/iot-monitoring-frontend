@@ -1,4 +1,4 @@
-// shared/api/sensorApi.ts (API для списка)
+
 import { rtkApi } from 'shared/api/rtkApi';
 import { Sensor, SensorAlarm, SensorConfig } from 'entities/Sensor/model/types/sensor';
 export const sensorApi = rtkApi

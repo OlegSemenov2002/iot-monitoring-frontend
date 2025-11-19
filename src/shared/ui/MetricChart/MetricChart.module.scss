@@ -1,7 +1,7 @@
 .MetricChart {
   width: 1200px;
-  height: 1200px; // задаём фиксированную высоту
-  background: #0a1b2d;
+  height: 1200px;
+  background: var(--card-bg);
   padding: 16px;
   display: flex;
   flex-direction: column;

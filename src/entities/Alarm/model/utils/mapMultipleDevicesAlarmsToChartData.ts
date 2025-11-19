@@ -25,7 +25,7 @@ export function mapMultipleDevicesAlarmsToChartData(
         }
     }
 
-    // Создание шаблона устройства → дата → значение
+
     const groupedByDevice: Record<string, Record<string, number>> = {};
     sensors.forEach(sensor => {
         const id = String(sensor.id);
@@ -35,7 +35,7 @@ export function mapMultipleDevicesAlarmsToChartData(
         });
     });
 
-    // Счётчик тревог
+
     alarms.forEach(alarm => {
         const id = String(alarm.device_id);
         const date = new Date(alarm.date_time).toISOString().split("T")[0]; // Точно совпадение с шаблоном
@@ -46,7 +46,7 @@ export function mapMultipleDevicesAlarmsToChartData(
 
 
 
-    // Преобразование к ChartData
+
     let res =  Object.entries(groupedByDevice).map(([deviceId, values]) => ({
         id: `Sensor ${deviceId}`,
         name: `Sensor ${deviceId}`,

@@ -30,6 +30,6 @@ export const settingSlice = createSlice({
     },
 });
 
-// Action creators are generated for each case reducer function
+
 export const { actions: settingsActions } = settingSlice;
 export const { reducer: settingsReducer } = settingSlice;

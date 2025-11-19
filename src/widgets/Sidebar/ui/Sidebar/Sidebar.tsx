@@ -17,6 +17,7 @@ import { Text } from 'shared/ui/Text/Text';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { SidebarItemsList } from '../../model/items';
 import cls from './Sidebar.module.scss';
+import {useTranslation} from "react-i18next";
 
 interface SidebarProps {
     className?: string;
@@ -25,6 +26,7 @@ interface SidebarProps {
 
 export const Sidebar = memo(({ className, profile }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
+    const { t } = useTranslation();
 
 
 
@@ -52,7 +54,7 @@ export const Sidebar = memo(({ className, profile }: SidebarProps) => {
         >
             <SidebarHeader
                 profile={profile}
-                mainRoleName={mainRoleName}
+                mainRoleName={t(mainRoleName)}
                 collapsed={collapsed}
             />
             <Button

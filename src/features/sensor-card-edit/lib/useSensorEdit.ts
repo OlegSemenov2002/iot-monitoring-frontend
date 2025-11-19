@@ -13,8 +13,7 @@ export const useSensorEdit = (sensor: Sensor) => {
 
     const [updateSensor, updateStatus] = useUpdateSensorMutation();
 
-    // если sensor обновился извне (RTK Query перезаписал)
-    // и мы НЕ в режиме редактирования → обновляем форму
+
     useEffect(() => {
         setState(prev => {
             if (!prev.isEditing) {
@@ -31,7 +30,7 @@ export const useSensorEdit = (sensor: Sensor) => {
     const startEdit = useCallback(() => {
         setState(prev => ({
             ...prev,
-            form: { ...prev.form }, // ← берём последнюю известную версию
+            form: { ...prev.form },
             isEditing: true,
             isDirty: false,
         }));

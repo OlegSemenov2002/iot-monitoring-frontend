@@ -9,6 +9,27 @@
   "Обновить страницу": "Reload page",
   "throw error": "throw error",
   "Главная": "Main",
+  "Administrator": "Administrator",
+  "User": "User",
+  "Guest": "Guest",
+  "Устройства": "Sensors",
+  "Имя": "Name",
+  "Последняя активность": "Last activity",
+  "Заряд": "Battery",
+  "Уведомления": "Notifications",
+
+  "Последние уведомления": "Last notifications",
+  "Датчик": "Sensor",
+  "Редактировать": "Edit",
+
+  "Отменить": "Cancel",
+  "Сохранить": "Save",
+
+
+
+
+
+
   "О сайте": "About us",
   "Переключить": "Переключить",
   "Короткий язык": "En",

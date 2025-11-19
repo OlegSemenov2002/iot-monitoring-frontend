@@ -1,4 +1,3 @@
-// api/devices.js
 const db = require('../db.json');
 
 module.exports = (req, res) => {
@@ -8,7 +7,6 @@ module.exports = (req, res) => {
     if (req.method === 'GET') {
         let devices = db.devices || [];
 
-        // Пагинация
         const page = parseInt(req.query._page) || 1;
         const limit = parseInt(req.query._limit) || 10;
         const start = (page - 1) * limit;
@@ -16,7 +14,6 @@ module.exports = (req, res) => {
 
         const result = devices.slice(start, end);
 
-        // Имитация задержки (как в json-server)
         setTimeout(() => {
             res.status(200).json(result);
         }, 800);

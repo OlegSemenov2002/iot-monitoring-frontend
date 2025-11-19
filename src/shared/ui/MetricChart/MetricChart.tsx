@@ -1,11 +1,10 @@
-// src/shared/ui/MetricChart/MetricChart.tsx
+import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-import cls from './MetricChart.module.scss';
-import {Theme, useTheme} from "app/providers/ThemeProvider";
-import {ChartData} from "shared/api/alarmApi";
-
-
+import cls from "./MetricChart.module.scss";
+import { Theme, useTheme } from "app/providers/ThemeProvider";
+import { ChartData } from "shared/api/alarmApi";
+import {useTranslation} from "react-i18next";
 
 interface MetricChartProps {
     data?: ChartData[];
@@ -15,39 +14,37 @@ interface MetricChartProps {
 }
 
 
-interface MetricChartProps {
-    data?: ChartData[]; // может быть undefined
-    width?: number;
-    height?: number;
-    isDashboard?: boolean;
-}
+const getColorsByTheme = (theme: Theme) => {
+    switch (theme) {
+        case Theme.DARK:
+        case Theme.MIDDLE:
+        case Theme.LIGHT:
+        default:
+            return {
+                grey: "var(--text-primary)",
+                primary: "var(--primary-color)",
+            };
+    }
+};
 
 export const MetricChart: React.FC<MetricChartProps> = ({
-    data = [], // дефолтный пустой массив
+    data = [],
     width = 1200,
     height = 400,
     isDashboard = false,
 }) => {
     const { theme } = useTheme();
+    const colors = getColorsByTheme(theme);
+    const {t} = useTranslation();
 
-    const colors = (() => {
-        switch (theme) {
-            case Theme.DARK: return { grey: ["#fff"], primary: ["#1e88e5"] };
-            case Theme.BLUE: return { grey: ["#fff"], primary: ["#90caf9"] };
-            case Theme.LIGHT:
-            default: return { grey: ["#fff"], primary: ["#90caf9"] };
-        }
-    })();
-
-    console.log("POINTS", data);
 
     return (
         <div className={cls.MetricChart} style={{ width, height }}>
             <ResponsiveLine
-                data={data} // теперь всегда массив
+                data={data}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
                 xScale={{ type: "point" }}
-                yScale={{ type: "linear", min: "auto", max: "auto"}}
+                yScale={{ type: "linear", min: "auto", max: "auto" }}
                 curve="catmullRom"
                 axisTop={null}
                 axisRight={null}
@@ -55,7 +52,7 @@ export const MetricChart: React.FC<MetricChartProps> = ({
                     tickSize: 0,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: isDashboard ? undefined : "Date",
+                    legend: isDashboard ? undefined : t('Date'),
                     legendOffset: 36,
                     legendPosition: "middle",
                 }}
@@ -63,7 +60,7 @@ export const MetricChart: React.FC<MetricChartProps> = ({
                     tickSize: 3,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: isDashboard ? undefined : "Count",
+                    legend: isDashboard ? undefined : t('Count'),
                     legendOffset: -40,
                     legendPosition: "middle",
                 }}
@@ -91,12 +88,20 @@ export const MetricChart: React.FC<MetricChartProps> = ({
                 ]}
                 theme={{
                     axis: {
-                        domain: { line: { stroke: colors.grey[0] } },
-                        ticks: { line: { stroke: colors.grey[0], strokeWidth: 1 }, text: { fill: colors.grey[0] } },
-                        legend: { text: { fill: colors.grey[0] } },
+                        domain: { line: { stroke: colors.grey } },
+                        ticks: {
+                            line: { stroke: colors.grey, strokeWidth: 1 },
+                            text: { fill: colors.grey },
+                        },
+                        legend: { text: { fill: colors.grey } },
                     },
-                    legends: { text: { fill: colors.grey[0] } },
-                    tooltip: { container: { background: colors.primary[0], color: "#fff" } },
+                    legends: { text: { fill: colors.grey } },
+                    tooltip: {
+                        container: {
+                            background: "var(--card-bg)",
+                            color: "var(--text-primary)",
+                        },
+                    },
                 }}
             />
         </div>

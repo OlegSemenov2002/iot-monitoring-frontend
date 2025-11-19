@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 
 interface ProgressCircleProps {
-    progress?: number; // 0..1
+    progress?: number;
     size?: number;
     strokeWidth?: number;
     className?: string;
 }
 
 const ProgressCircle: React.FC<ProgressCircleProps> = ({
-    progress = 0.75,
-    size = 40,
-    strokeWidth = 6,
-    className,
-}) => {
+                                                           progress = 0.75,
+                                                           size = 40,
+                                                           strokeWidth = 6,
+                                                           className,
+                                                       }) => {
     const [animatedProgress, setAnimatedProgress] = useState(0);
 
     useEffect(() => {
@@ -33,23 +33,23 @@ const ProgressCircle: React.FC<ProgressCircleProps> = ({
             className={className}
             style={{ transform: "rotate(-90deg)" }}
         >
-            {/* Фоновый круг */}
+            {/* фоновый круг */}
             <circle
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke="#032340"
+                stroke="var(--card-border)"
                 strokeWidth={strokeWidth}
                 fill="none"
                 vectorEffect="non-scaling-stroke"
                 shapeRendering="geometricPrecision"
             />
-            {/* Прогресс */}
+            {/* прогресс */}
             <circle
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
-                stroke="#2196f3"
+                stroke="var(--primary-color)"
                 strokeWidth={strokeWidth}
                 fill="none"
                 strokeDasharray={circumference}

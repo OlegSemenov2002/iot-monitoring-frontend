@@ -19,6 +19,8 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 import {Page} from "shared/ui/Page/Page";
+import {Skeleton} from "shared/ui/Skeleton/Skeleton";
+import cls from "./ProfilePage.module.scss"
 
 const reducers: ReducersList = {
     profile: profileReducer,
@@ -45,7 +47,6 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         },
     ] = useUpdateProfileMutation();
 
-    // 2) Запрос: объект с алиасами (+ skip, если id нет)
     const {
         data: dataProfile,
         isLoading: isLoadingProfile, // было: isLoading
@@ -85,7 +86,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         dispatch(profileActions.setForm({ country }));
     }, [dispatch]);
     if (isLoadingProfile) {
-        return <Loader />;
+        return <Skeleton className={cls.skeleton} width="15%" height={50} />;
     }
     if (isErrorProfile) {
         return <Text theme={TextTheme.ERROR} title="error" />;
