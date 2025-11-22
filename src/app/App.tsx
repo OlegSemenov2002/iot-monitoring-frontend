@@ -1,30 +1,26 @@
-import React, {Suspense, useEffect, useRef} from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Theme, useTheme } from 'app/providers/ThemeProvider';
 import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import {getUserAuthData, getUserId, getUserInited, userActions} from 'entities/User';
+import {
+    getUserId,
+    getUserInited,
+    userActions,
+    UserRole,
+} from 'entities/User';
 import { getSettingsForm } from 'entities/Settings';
 import { skipToken } from '@reduxjs/toolkit/query/react';
-import {useGetProfileDataQuery} from "entities/Profile";
+import { useGetProfileDataQuery } from 'entities/Profile';
+import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 function App() {
-
     const { theme, changeTheme } = useTheme();
-
 
     const dispatch = useDispatch();
     const inited = useSelector(getUserInited);
-
-
-
-
-
-
-
-
 
     const userId = useSelector(getUserId);
 
@@ -33,18 +29,29 @@ function App() {
         {
             refetchOnMountOrArgChange: false,
             refetchOnReconnect: false,
-            refetchOnFocus: false
-        }
+            refetchOnFocus: false,
+        },
     );
 
     useEffect(() => {
+        const isDemo =
+            typeof import.meta !== 'undefined' &&
+            (import.meta as any).env?.VITE_DEMO_AUTOLOGIN_ADMIN === 'true';
+
+        const storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
+
+        if (isDemo && !storedUser) {
+            const adminUser = {
+                id: '1',
+                username: 'admin',
+                roles: [UserRole.ADMIN],
+            };
+
+            localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(adminUser));
+        }
+
         dispatch(userActions.initAuthData());
     }, [dispatch]);
-
-
-
-
-
 
     const settingsTheme = useSelector(getSettingsForm)?.theme as Theme | undefined;
 
@@ -59,7 +66,7 @@ function App() {
             <Suspense fallback="">
                 <Navbar />
                 <div className="content-page">
-                    <Sidebar profile={profile}/>
+                    <Sidebar profile={profile} />
                     {inited && <AppRouter />}
                 </div>
             </Suspense>

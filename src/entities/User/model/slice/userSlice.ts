@@ -20,7 +20,7 @@ export const userSlice = createSlice({
                 state.authData = {
                     id: parsed.id,
                     username: parsed.username,
-                    roles: parsed.roles, // если есть
+                    roles: parsed.roles,
                 };
             }
             state._inited = true;
