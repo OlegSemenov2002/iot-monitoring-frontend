@@ -69,7 +69,7 @@ export const SidebarHeader = memo(({
                 {profile.position && (
                     <Text
                         theme={TextTheme.INVERTED}
-                        text={t(profile.position)}
+                        text={t(profile.position)} /* i18next-extract-disable-line */
                         className={cls.role}
                         align={TextAlign.CENTER}
                     />

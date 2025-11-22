@@ -11,8 +11,7 @@ import { SidebarHeader } from 'widgets/Sidebar/ui/SidebarHeader/SidebarHeader';
 import { Profile} from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Loader } from 'lucide-react';
-import { t } from 'i18next';
-import { Text } from 'shared/ui/Text/Text';
+
 
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import { SidebarItemsList } from '../../model/items';
@@ -54,7 +53,7 @@ export const Sidebar = memo(({ className, profile }: SidebarProps) => {
         >
             <SidebarHeader
                 profile={profile}
-                mainRoleName={t(mainRoleName)}
+                mainRoleName={t(mainRoleName)} /* i18next-extract-disable-line */
                 collapsed={collapsed}
             />
             <Button

@@ -34,10 +34,9 @@ function App() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const host = window.location.hostname;
-            const isDemo = host.includes('vercel.app');
+            const storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
 
-            if (isDemo) {
+            if (!storedUser) {
                 const adminUser = {
                     id: '1',
                     username: 'admin',
@@ -50,7 +49,6 @@ function App() {
                         JSON.stringify(adminUser),
                     );
                 } catch (e) {
-                    // если localStorage недоступен — просто игнор
                 }
             }
         }
