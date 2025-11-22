@@ -23,20 +23,24 @@ module.exports = (req, res) => {
         return;
     }
 
-    const { username, password } = req.body || {};
-    const db = loadDb();
+    try {
+        const db = loadDb();
+        const admin =
+            (db.users || []).find((u) => u.id === '1') ||
+            (db.users || []).find((u) => u.username === 'admin');
 
-    const user = (db.users || []).find(
-        (u) => u.username === username && u.password === password,
-    );
-
-    setTimeout(() => {
-        if (!user) {
-            res.status(403).json({ message: 'User not found' });
+        if (!admin) {
+            res.status(500).json({ message: 'Admin user not found in db.json' });
             return;
         }
 
-        const { password: _pw, ...safeUser } = user;
-        res.status(200).json(safeUser);
-    }, 800);
+        const { password: _pw, ...safeAdmin } = admin;
+
+        setTimeout(() => {
+            res.status(200).json(safeAdmin);
+        }, 300);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message || 'Internal error' });
+    }
 };

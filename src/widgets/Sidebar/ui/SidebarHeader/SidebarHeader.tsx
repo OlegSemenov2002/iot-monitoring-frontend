@@ -20,47 +20,45 @@ interface SidebarHeaderProps {
     mainRoleName: string;
     collapsed: boolean;
 }
-
 export const SidebarHeader = memo(({
-    className,
-    profile,
-    mainRoleName,
-    collapsed,
-}: SidebarHeaderProps) => {
+                                       className,
+                                       profile,
+                                       mainRoleName,
+                                       collapsed,
+                                   }: SidebarHeaderProps) => {
     const { t } = useTranslation();
 
     if (!profile) {
-
         return (
-            <div className={classNames(cls.SidebarHeader, {}, [className])}>
-            </div>
+            <div className={classNames(cls.SidebarHeader, {}, [className])} />
         );
+    }
 
-
+    let translatedPosition: string | undefined;
+    if (profile.position) {
+        // i18next-extract-disable-next-line
+        translatedPosition = t(profile.position);
     }
 
     if (collapsed) {
         return (
             <div className={classNames(cls.SidebarHeader, {}, [className])}>
-              <AppLink to={RoutePath.profile} className={cls.miniLink}>
-                <Avatar
-                    src={profile.avatar}
-                    size={50}
-                    className={cls.miniavatar}
-                />
-            </AppLink>
+                <AppLink to={RoutePath.profile} className={cls.miniLink}>
+                    <Avatar
+                        src={profile.avatar}
+                        size={50}
+                        className={cls.miniavatar}
+                    />
+                </AppLink>
             </div>
         );
     }
 
     return (
         <div className={classNames(cls.SidebarHeader, {}, [className])}>
-            <Text className={cls.Role} text={mainRoleName}/>
+            <Text className={cls.Role} text={mainRoleName} />
             <AppLink to={RoutePath.profile} className={cls.profileLink}>
-                <Avatar
-                    src={profile.avatar}
-                    className={cls.avatar}
-                />
+                <Avatar src={profile.avatar} className={cls.avatar} />
             </AppLink>
             <div className={cls.info}>
                 <Text
@@ -69,16 +67,14 @@ export const SidebarHeader = memo(({
                     className={cls.name}
                 />
 
-                {profile.position && (
+                {translatedPosition && (
                     <Text
                         theme={TextTheme.INVERTED}
-                        text={t(profile.position)} /* i18next-extract-disable-line */
+                        text={translatedPosition}
                         className={cls.role}
                         align={TextAlign.CENTER}
                     />
                 )}
-
-
             </div>
         </div>
     );
