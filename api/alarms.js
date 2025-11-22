@@ -23,11 +23,16 @@ module.exports = (req, res) => {
         return;
     }
 
-    const deviceId = req.query.device_id;
-    const db = loadDb();
-    const alarms = (db.alarms || []).filter((a) => String(a.device_id) === String(deviceId));
+    try {
+        const deviceId = req.query.device_id;
+        const db = loadDb();
+        const alarms = (db.alarms || []).filter(
+            (a) => !deviceId || String(a.device_id) === String(deviceId),
+        );
 
-    setTimeout(() => {
         res.status(200).json(alarms);
-    }, 800);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message || 'Internal error' });
+    }
 };

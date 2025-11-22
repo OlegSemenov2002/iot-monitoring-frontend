@@ -17,7 +17,12 @@ module.exports = (req, res) => {
         return;
     }
 
-    if (req.method === 'GET') {
+    if (req.method !== 'GET') {
+        res.status(405).end();
+        return;
+    }
+
+    try {
         const db = loadDb();
         const devices = db.devices || [];
 
@@ -29,11 +34,10 @@ module.exports = (req, res) => {
         const result = devices.slice(start, end);
 
         res.setHeader('X-Total-Count', String(devices.length));
-
-        setTimeout(() => {
-            res.status(200).json(result);
-        }, 800);
-    } else {
-        res.status(405).end();
+        res.status(200).json(result);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message || 'Internal error' });
     }
 };
+
