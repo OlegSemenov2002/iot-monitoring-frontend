@@ -34,11 +34,19 @@ function App() {
     );
 
     useEffect(() => {
-        const isDemo =
-            typeof import.meta !== 'undefined' &&
-            (import.meta as any).env?.VITE_DEMO_AUTOLOGIN_ADMIN === 'true';
+        let isDemo = false;
 
-        const storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
+        if (typeof window !== 'undefined') {
+            const host = window.location.hostname;
+            isDemo =
+                host.endsWith('.vercel.app') ||
+                host === 'your-demo-domain.com'; // если будет свой домен — впиши сюда
+        }
+
+        let storedUser: string | null = null;
+        if (typeof window !== 'undefined') {
+            storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
+        }
 
         if (isDemo && !storedUser) {
             const adminUser = {
