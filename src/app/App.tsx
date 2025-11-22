@@ -9,12 +9,10 @@ import {
     getUserId,
     getUserInited,
     userActions,
-    UserRole,
 } from 'entities/User';
 import { getSettingsForm } from 'entities/Settings';
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useGetProfileDataQuery } from 'entities/Profile';
-import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 function App() {
     const { theme, changeTheme } = useTheme();
@@ -33,26 +31,6 @@ function App() {
     );
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-
-            if (!storedUser) {
-                const adminUser = {
-                    id: '1',
-                    username: 'admin',
-                    roles: [UserRole.ADMIN],
-                };
-
-                try {
-                    localStorage.setItem(
-                        USER_LOCALSTORAGE_KEY,
-                        JSON.stringify(adminUser),
-                    );
-                } catch (e) {
-                }
-            }
-        }
-
         dispatch(userActions.initAuthData());
     }, [dispatch]);
 

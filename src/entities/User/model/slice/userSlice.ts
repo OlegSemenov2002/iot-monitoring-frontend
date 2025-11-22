@@ -1,9 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { UserSchema, User } from '../types/user';
+import { UserRole } from '../consts/userConsts'; // путь подправь под свой
+
+const demoAdmin: User = {
+    id: '1',
+    username: 'admin',
+    roles: [UserRole.ADMIN],
+};
 
 const initialState: UserSchema = {
-    _inited: false,
+    authData: demoAdmin,
+    _inited: true,
 };
 
 export const userSlice = createSlice({
@@ -12,26 +20,28 @@ export const userSlice = createSlice({
     reducers: {
         setAuthData: (state, action: PayloadAction<User>) => {
             state.authData = action.payload;
+            try {
+                localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(action.payload));
+            } catch {
+            }
         },
         initAuthData: (state) => {
-            const user = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-            if (user) {
-                const parsed = JSON.parse(user);
-                state.authData = {
-                    id: parsed.id,
-                    username: parsed.username,
-                    roles: parsed.roles,
-                };
+            state.authData = demoAdmin;
+            try {
+                localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(demoAdmin));
+            } catch {
             }
             state._inited = true;
         },
         logout: (state) => {
             state.authData = undefined;
-            localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+            try {
+                localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+            } catch {
+            }
         },
     },
 });
 
-// Action creators are generated for each case reducer function
 export const { actions: userActions } = userSlice;
 export const { reducer: userReducer } = userSlice;
