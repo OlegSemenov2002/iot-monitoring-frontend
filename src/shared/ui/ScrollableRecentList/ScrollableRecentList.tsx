@@ -27,8 +27,8 @@ export const ScrollableRecentList = <T, >({
     if (isLoading) {
         return (
             <Skeleton
-                width="40%"
-                height={height}
+                width="100%"
+                height={300}
             />
         );
     }

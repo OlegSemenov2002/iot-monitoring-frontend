@@ -15,22 +15,13 @@ export const profileApi = rtkApi
                 keepUnusedDataFor: 60 * 60 * 24, // 24 часа
             }),
 
-            updateProfile: build.mutation({
+            updateProfile: build.mutation<Profile, { userId: string; profileForm: Profile }>({
                 query: ({ userId, profileForm }) => ({
                     url: `/profile/${userId}`,
                     method: 'PATCH',
                     body: profileForm,
                 }),
                 invalidatesTags: (_res, _err, { userId }) => [{ type: 'Profile', id: userId }],
-
-                async onQueryStarted(_arg, { queryFulfilled }) {
-                    try {
-                        const { data } = await queryFulfilled;
-                    } catch (error:any) {
-                        console.log(error);
-                    }
-                },
-
             }),
 
         }),

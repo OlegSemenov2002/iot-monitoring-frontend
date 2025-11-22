@@ -1,6 +1,9 @@
 .ProfilePage {
-
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+
 .skeleton {
-  margin: 15px;
+  margin-top: 16px;
 }

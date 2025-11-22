@@ -8,8 +8,6 @@ import {useTranslation} from "react-i18next";
 
 interface MetricChartProps {
     data?: ChartData[];
-    width?: number;
-    height?: number;
     isDashboard?: boolean;
 }
 
@@ -29,8 +27,6 @@ const getColorsByTheme = (theme: Theme) => {
 
 export const MetricChart: React.FC<MetricChartProps> = ({
     data = [],
-    width = 1200,
-    height = 400,
     isDashboard = false,
 }) => {
     const { theme } = useTheme();
@@ -39,7 +35,7 @@ export const MetricChart: React.FC<MetricChartProps> = ({
 
 
     return (
-        <div className={cls.MetricChart} style={{ width, height }}>
+        <div className={cls.MetricChart}>
             <ResponsiveLine
                 data={data}
                 margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

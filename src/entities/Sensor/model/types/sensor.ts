@@ -44,7 +44,7 @@ export type SensorId = Sensor['id'];
 
 // Для alarms/config (вложенные)
 export interface SensorAlarm {
-    id:  | string;
+    id:  number  | string;
     device_id: number | string;
     date_time: string;
     arming: boolean;

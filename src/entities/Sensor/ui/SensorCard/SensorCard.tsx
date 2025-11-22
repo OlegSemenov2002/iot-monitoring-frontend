@@ -4,10 +4,11 @@ import { Sensor } from 'entities/Sensor/model/types/sensor';
 import cls from './SensorCard.module.scss';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input, INPUT_VIEWS } from 'shared/ui/Input/Input';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { Switch, SWITCH_SIZE } from 'shared/ui/Switch/Switch';
 import { useToggleSensorNotify } from 'features/SensorNotifications';
+import { usePermission, ACTIONS, RESOURCES } from 'shared/lib/rbac';
 
 export const SENSOR_CARD_VIEWS = {
     FULL: 'full',
@@ -39,7 +40,7 @@ export const SensorCard = (props: SensorCardProps) => {
         className,
         sensor,
         view = SENSOR_CARD_VIEWS.COMPACT,
-        readonly = true,
+        readonly: readonlyProp = true,
         form = sensor,
         isDirty = false,
         isSaving = false,
@@ -64,6 +65,27 @@ export const SensorCard = (props: SensorCardProps) => {
         [cls[view]]: true,
     };
 
+    const canStartEdit = usePermission({
+        action: ACTIONS.SENSOR_EDIT_START,
+        resource: RESOURCES.SENSOR,
+        ownerId: sensor.security_user_id,
+    });
+
+    const canUpdate = usePermission({
+        action: ACTIONS.SENSOR_UPDATE,
+        resource: RESOURCES.SENSOR,
+        ownerId: sensor.security_user_id,
+    });
+
+    const canCancel = usePermission({
+        action: ACTIONS.SENSOR_EDIT_CANCEL,
+        resource: RESOURCES.SENSOR,
+        ownerId: sensor.security_user_id,
+    });
+
+    const isReadonlyByRbac = !canUpdate;
+    const readonly = readonlyProp || isReadonlyByRbac;
+
     if (error) {
         return (
             <Text
@@ -79,7 +101,13 @@ export const SensorCard = (props: SensorCardProps) => {
             ? optimisticNotify[sensor.id]
             : sensor.notify;
 
-    const batteryPercent = Math.max(0, Math.min(100, sensor.battery ?? 0));
+    const batteryPercent = useMemo(
+        () => Math.max(0, Math.min(100, sensor.battery ?? 0)),
+        [sensor.battery],
+    );
+
+    const showEditButton = canStartEdit;
+    const showSaveCancel = !readonly && (canUpdate || canCancel);
 
     return (
         <div className={classNames(cls.SensorCard, mods, [className])}>
@@ -100,22 +128,13 @@ export const SensorCard = (props: SensorCardProps) => {
                     </div>
 
                     <div className={cls.actions}>
-                        {readonly ? (
-                            <Button
-                                className={cls.editBtn}
-                                theme={ButtonTheme.OUTLINE}
-                                onClick={onEdit}
-                                disabled={isSaving}
-                            >
-                                {t('Редактировать')}
-                            </Button>
-                        ) : (
+                        {showSaveCancel ? (
                             <>
                                 <Button
                                     className={cls.editBtn}
                                     theme={ButtonTheme.OUTLINE_RED}
                                     onClick={onCancel}
-                                    disabled={isSaving}
+                                    disabled={isSaving || !canCancel}
                                 >
                                     {t('Отменить')}
                                 </Button>
@@ -123,11 +142,22 @@ export const SensorCard = (props: SensorCardProps) => {
                                     className={cls.saveBtn}
                                     theme={ButtonTheme.OUTLINE}
                                     onClick={onSave}
-                                    disabled={isSaving}
+                                    disabled={isSaving || !isDirty || !canUpdate}
                                 >
                                     {t('Сохранить')}
                                 </Button>
                             </>
+                        ) : (
+                            showEditButton && (
+                                <Button
+                                    className={cls.editBtn}
+                                    theme={ButtonTheme.OUTLINE}
+                                    onClick={onEdit}
+                                    disabled={isSaving || !canStartEdit}
+                                >
+                                    {t('Редактировать')}
+                                </Button>
+                            )
                         )}
                     </div>
                 </div>
@@ -142,7 +172,11 @@ export const SensorCard = (props: SensorCardProps) => {
                     <div className={cls.detailsGrid}>
                         <div className={cls.detailsLabel}>{t('Имя')}</div>
                         <div className={cls.detailsValue}>
-                            {!readonly ? (
+                            {readonly ? (
+                                <span className={cls.staticValue}>
+                                    {form.description || '—'}
+                                </span>
+                            ) : (
                                 <Input
                                     view={INPUT_VIEWS.IOT}
                                     value={form.description}
@@ -151,19 +185,21 @@ export const SensorCard = (props: SensorCardProps) => {
                                     onChange={handleChangeDescription}
                                     readonly={false}
                                 />
-                            ) : (
-                                form.description || '—'
                             )}
                         </div>
 
                         <div className={cls.detailsLabel}>{t('Последняя активность')}</div>
                         <div className={cls.detailsValue}>
-                            {sensor.last_act || '—'}
+                            <span className={cls.staticValue}>
+                                {sensor.last_act || '—'}
+                            </span>
                         </div>
 
                         <div className={cls.detailsLabel}>Device EUI</div>
                         <div className={cls.detailsValue}>
-                            {sensor.device_eui || '—'}
+                            <span className={cls.staticValue}>
+                                {sensor.device_eui || '—'}
+                            </span>
                         </div>
 
                         <div className={cls.detailsLabel}>{t('Заряд')}</div>

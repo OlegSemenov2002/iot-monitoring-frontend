@@ -133,6 +133,15 @@
   color: var(--text-primary);
   display: flex;
   align-items: center;
+  min-height: 36px;
+}
+
+.staticValue {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .input {

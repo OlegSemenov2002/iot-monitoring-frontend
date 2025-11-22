@@ -1,10 +1,129 @@
 .ProfileCard {
-    padding: 20px;
-    border: 2px solid var(--inverted-bg-color);
+    width: 50%;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: var(--text-primary);
+
+    &.editing {
+        border-color: var(--inverted-primary-color);
+    }
+}
+
+.headerRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.titleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+}
+
+.titleLabel {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+}
+
+.titleValue {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+.headerControls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.avatarWrapper {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.actionBtn {
+    white-space: nowrap;
+}
+
+.contentRow {
+    border-top: 1px solid var(--card-border);
+    padding-top: 20px;
+    display: flex;
+}
+
+.detailsCard {
+    flex: 1;
+    max-width: 720px;
+}
+
+.detailsHeader {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    column-gap: 32px;
+    row-gap: 12px;
+    font-size: 14px;
+}
+
+.detailsLabel {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    align-self: center;
+}
+
+.detailsValue {
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    min-height: 36px; // под высоту инпута, чтобы ряды не прыгали
+}
+
+.staticValue {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;     // та же высота, что у инпута
+    font-size: 14px;
+    line-height: 1.2;
 }
 
 .input {
-    margin-top: 10px;
+    width: 100%;
 }
 
 .loading,
@@ -12,15 +131,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 300px;
-}
-
-.avatarWrapper {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
-
-.editing {
-    border: 2px solid var(--inverted-primary-color);
+    min-height: 260px;
 }

@@ -13,8 +13,6 @@ interface MetricChartCardProps {
     title: string;
     loading: boolean;
     data: any[];
-    width: number;
-    height: number;
     initialRange?: DateRange;
     onRangeChange: (newRange: DateRange) => void;
 }
@@ -24,28 +22,27 @@ export const MetricChartCard: React.FC<MetricChartCardProps> = ({
     title,
     loading,
     data,
-    width,
-    height,
     initialRange,
     onRangeChange,
-}) => {
-    const CARD_WIDTH = width;
-    const CARD_HEIGHT = height + 80;
 
+}) => {
     if (loading) {
-        return (
-            <Skeleton
-                width="100%"
-                height={CARD_HEIGHT}
-            />
-        );
+        return <Skeleton
+            width="100%"
+            height={500}
+        />
     }
 
     return (
         <section className={classNames(cls.MetricChartCard, {}, [className])}>
-            <h2>{title}</h2>
-            <DateRangePicker initialRange={initialRange} onChange={onRangeChange} />
-            <MetricChart data={data} width={width} height={height} />
+            <div className={cls.Header}>
+                <h2 className={cls.Title}>{title}</h2>
+                <DateRangePicker initialRange={initialRange} onChange={onRangeChange} />
+            </div>
+
+            <div className={cls.ChartContainer}>
+                <MetricChart data={data} />
+            </div>
         </section>
     );
 };

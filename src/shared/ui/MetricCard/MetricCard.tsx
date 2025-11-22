@@ -26,14 +26,12 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
 
 
-    const CARD_WIDTH = 340;
-    const CARD_HEIGHT = 130;
 
     if (loading) {
         return (
             <Skeleton
-                width={`${CARD_WIDTH}px`}
-                height={`${CARD_HEIGHT}px`}
+                width={'100%'}
+                height={100}
             />
         );
     }
@@ -43,7 +41,6 @@ export const MetricCard: React.FC<MetricCardProps> = ({
     return (
         <div
             className={classNames(cls.MetricCard, {}, [className])}
-            style={{ width: CARD_WIDTH, height: CARD_HEIGHT }}
         >
             <div className={cls.TopRow}>
                 <div className={cls.IconTitle}>

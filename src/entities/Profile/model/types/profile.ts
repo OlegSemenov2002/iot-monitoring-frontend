@@ -3,6 +3,8 @@ import { Country } from 'entities/Country/model/types/country';
 import { SettingsSchema } from 'entities/Settings';
 
 export interface Profile {
+    id?: number,
+    userId?: number,
     first?: string;
     lastname?: string;
     age?: number,
