@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
-import { UserSchema, User } from '../types/user';
-import { UserRole } from '../consts/userConsts'; // путь подправь под свой
+import {UserSchema, User, UserRole} from '../types/user';
 
 const demoAdmin: User = {
     id: '1',

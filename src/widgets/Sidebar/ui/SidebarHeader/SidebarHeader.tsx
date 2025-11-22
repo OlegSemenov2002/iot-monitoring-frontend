@@ -1,4 +1,7 @@
+/* i18next-extract-disable-file */
 import { classNames } from 'shared/lib/classNames/classNames';
+
+
 import { useTranslation } from 'react-i18next';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import {Text, TextAlign, TextTheme} from 'shared/ui/Text/Text';

@@ -1,3 +1,4 @@
+/* i18next-extract-disable-file */
 import { useTranslation } from 'react-i18next';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { memo } from 'react';
