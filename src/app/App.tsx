@@ -21,7 +21,6 @@ function App() {
 
     const dispatch = useDispatch();
     const inited = useSelector(getUserInited);
-
     const userId = useSelector(getUserId);
 
     const { data: profile } = useGetProfileDataQuery(
@@ -34,28 +33,26 @@ function App() {
     );
 
     useEffect(() => {
-        let isDemo = false;
-
         if (typeof window !== 'undefined') {
             const host = window.location.hostname;
-            isDemo =
-                host.endsWith('.vercel.app') ||
-                host === 'your-demo-domain.com'; // если будет свой домен — впиши сюда
-        }
+            const isDemo = host.includes('vercel.app');
 
-        let storedUser: string | null = null;
-        if (typeof window !== 'undefined') {
-            storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-        }
+            if (isDemo) {
+                const adminUser = {
+                    id: '1',
+                    username: 'admin',
+                    roles: [UserRole.ADMIN],
+                };
 
-        if (isDemo && !storedUser) {
-            const adminUser = {
-                id: '1',
-                username: 'admin',
-                roles: [UserRole.ADMIN],
-            };
-
-            localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(adminUser));
+                try {
+                    localStorage.setItem(
+                        USER_LOCALSTORAGE_KEY,
+                        JSON.stringify(adminUser),
+                    );
+                } catch (e) {
+                    // если localStorage недоступен — просто игнор
+                }
+            }
         }
 
         dispatch(userActions.initAuthData());
